@@ -23,7 +23,7 @@ css e javascript js.
   Por exemplo, você pode desejar que uma dica de ferramenta ou caixa de diálogo 
   seja aberta e permaneça próxima ao item relevante na página.
 
-- Com o Tether Podemos posicionar elementos dentro do DOM (árvore do html) forma simplificada.
+- Com o Tether Podemos posicionar elementos dentro do DOM (árvore do html) de forma simplificada.
 
 Criando os componentes Topo, Home e Rodape
 
@@ -51,4 +51,41 @@ Criando e alterando o favicon
 
 O que são Serviços (Services)?
 
-- xxx...
+- Serviços são classes comuns com objetivos bem definidos que visam atender a alguma 
+necessidade específica da aplicação.
+
+- A funcão do componente é fazer o databinding com seu respectivo template.
+- Podemos criar um serviço para controlar os logs de acesso para podermos saber
+quais rotas estão sendo acessadas.
+- Podemos usar um serviço para fazer o retorno de uma API de terceiro.
+- Quando necessário os serviços podem ser injetados nos componentes que por sua 
+vez farão as mudanças visuais em seus templates.
+- Um serviço pode ser injetado em três escopos diferentes, em escopo de módulo, por 
+exemplo no AppModule é aonde declaramos todos os componentes da aplicação.
+- Podemos trabalhar com a mesma instância de um serviço em toda a aplicação de modo 
+singleton.
+- Um serviço pode ser injetado diretamente no componente e ficar disponível 
+apenas no componente em que foi injetado, ou também pode ser declarado no módulo 
+principal e ficar disponível em toda a aplicação.
+- Um serviço pode ser injetado em outro serviço através da função decoradora @Injectable.
+
+Criando um serviço para exibir ofertas
+
+Injetando o serviço de ofertas no componente Home parte 1
+
+- Instanciar uma classe de serviço dentro do arquivo ts do componente que iremos utilizar
+é uma maneira errada de usar um service.
+- Primeiro temos que configurar o serviço como sendo um provider.
+- Dentro do decorator @Component do arquivo ts do componente atual referenciamos em 
+providers o nome da classe que contém o serviço que queremos injetar.
+- Segundo temos que criar uma variavel dentro do construtor da classe do componente,
+essa variavel será privada e do tipo da classe que contém o service.
+
+- Se declararmos um provider dentro de @NgModule em app.module.ts ele estará disponível
+para todos os componentes da aplicação.
+
+Exibindo ofertas com base no serviço OfertasService parte 1
+
+- A idéia é criar uma classe que representa uma oferta e trabalharmos com arrays de ofertas
+dentro de nossa aplicação.
+- 
