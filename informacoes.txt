@@ -1,0 +1,54 @@
+Para criar um novo projeto em Angular usamos o comando:
+    -  ng new appPassaroUrbano --prefix main
+    -  Prefix é o nome do seletor pelo qual o componente será invocado dentro do html.
+    -  Foi criado uma tag chamada main-root,  <main-root></main-root> para invocar nosso 
+    -  componente. 
+- Também podemos usar a flag --minimal na criação do projeto se não quisermos que seja 
+criado os arquivos de testes.
+
+- Podemos alterar o prefix através do arquivo angular.json.
+
+Instalando o Bootstrap, JQuery e Tether no projeto
+
+- npm install bootstrap@4.5.3 --save
+- npm install jquery@3.5.1 --save
+- npm install popper.js@1.14.3 --save
+- npm install tether@2.0.0 --save
+
+- Após a instalação é necessário referenciar no arquivo angular.json os arquivos de estilo
+css e javascript js.
+
+- O Tether é uma biblioteca JavaScript para fazer com que um elemento posicionado 
+  absolutamente de forma eficiente fique próximo a outro elemento na página. 
+  Por exemplo, você pode desejar que uma dica de ferramenta ou caixa de diálogo 
+  seja aberta e permaneça próxima ao item relevante na página.
+
+- Com o Tether Podemos posicionar elementos dentro do DOM (árvore do html) forma simplificada.
+
+Criando os componentes Topo, Home e Rodape
+
+- Criamos três componentes, topo (header), rodape (footer), home (conteudo principal).
+- Para criar os componentes usaremos os seguintes comandos: 
+
+- ng g c topo --skip-tests
+- ng g c home --skip-tests
+- ng g c rodape --skip-tests
+
+- O nome do seletor pode ser consultado dentro do arquivo ts do proprio componente
+ao qual queremos referenciar.
+- O nome do seletor é composto pelo nome do seletor principal + nome do componente.
+- O nome do seletor principal fica no arquivo angular.json em prefix.
+
+- Comando para rodar o JSON Server:
+    - json-server --watch db.json
+
+- A porta default do JSON Server é a 3000.
+
+Criando e alterando o favicon
+
+- O favicon principal da aplicação fica no diretório src/favicon.ico
+- Há uma referência para o favicon no arquivo angular.json.
+
+O que são Serviços (Services)?
+
+- xxx...
