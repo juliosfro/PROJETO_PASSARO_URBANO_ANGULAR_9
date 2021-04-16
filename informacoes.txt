@@ -88,4 +88,48 @@ Exibindo ofertas com base no serviço OfertasService parte 1
 
 - A idéia é criar uma classe que representa uma oferta e trabalharmos com arrays de ofertas
 dentro de nossa aplicação.
+
+App2 - Exibindo ofertas com base no serviço OfertasService parte 2
+
+- Em serviços podemos trabalhar com escopos diferenciados, por exemplo o escopo do módulo 
+principal inteiro.
+
+Promises - Entendendo o processamento síncrono e assíncrono
+
+- Promises como o próprio nome sugere são promessas. Na pratica uma promise é um objeto 
+usado para processamento assíncrono, esse objeto representa um valor que pode estar 
+disponível agora, no futuro ou nunca.
+
+Processamento síncrono e assíncrono
+
+- Processamento síncrono: Aguarda a finalização do processo para seguir para o próximo.
+- Processamento assíncrono: Não aguarda a finalização do processo seguindo para o próximo.
+
+Promises na prática parte 1 - Introdução a estratégia de uso
+
+- Algo é síncrono quando o retorno é imediato, por exemplo consultar dados em memória.
+- Quando a informação demora certo tempo para ser retornada estamos trabalhando de forma 
+assíncrona, nesse caso usamos métodos de promise.
+
+Promises na prática parte 2 (Resolve e then)
+
+- Primeiro criamos uma promessa e depois cumprimos quando houver retorno dos dados.
+- Promise é um recurso nativo da linguagem de programação JavaScript.
+- Toda promise espera uma função de call-back que é uma ação, a lógica dentro dessa
+função pode ser resolvida ou rejeitada.
+- Quando há latência (demora) é assíncrono.
+- O método then executa ações após a promise ser resolvida ou rejeitada.
+
+Promises na prática parte 3 (Reject e then)
+
+- Existe uma forma de rejeitar e dizer o que tem que ser feito se a promise for rejeitada.
+
+Promises na prática parte 4 (Reject e catch)
+
+- O método catch é muito mais utilizado que o método reject.
+- O método catch deixa o código mais organizado e menos verboso para ler.
+- É vantajoso usar promise quando ocorrer comunicação de forma assíncrona.
+
+ Promises na prática parte 5 (Processamento assíncrono e encadeamento)
+
 - 

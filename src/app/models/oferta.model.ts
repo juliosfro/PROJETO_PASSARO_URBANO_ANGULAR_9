@@ -1,3 +1,4 @@
+import { Imagem } from './imagem.model';
 export class Oferta {
 
     public id: number = 0;
@@ -7,8 +8,8 @@ export class Oferta {
     public anunciante: string = '';
     public valor: number = 0;
     public destaque: boolean = false;
-    public imagens: Array<Object> = [];
-
+    public imagens: Array<Imagem> = [];
+   
     constructor() {
     }
 

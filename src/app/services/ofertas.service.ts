@@ -2,7 +2,7 @@ import { Oferta } from './../models/oferta.model';
 
 export class OfertasService {
 
-    public ofertas: Array<Oferta> = [
+    public ofertas: Oferta[] = [
         {
             id: 1,
             categoria: "restaurante",
@@ -53,8 +53,15 @@ export class OfertasService {
         }
     ];
 
-    public getofertas(): Array<Oferta> {
+    public getOfertas(): Oferta[] {
         return this.ofertas;
     }
 
+    public getOfertas2(): Promise<Oferta[]> {
+        /* Algum tipo de processamento que ao finalizar chama a funcao resolve ou reject */
+        return new Promise((resolve, reject) => {
+            let deu_certo = false;
+            deu_certo ? resolve(this.ofertas) : reject({codigo_erro: 404, mensagem: 'Server Not Found.'});
+        });
+    }
 }

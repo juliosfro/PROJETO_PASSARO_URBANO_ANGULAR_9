@@ -1,6 +1,7 @@
 import { Oferta } from './../models/oferta.model';
 import { OfertasService } from './../services/ofertas.service';
 import { Component, OnInit } from '@angular/core';
+import { jsDocComment } from '@angular/compiler';
 
 @Component({
   selector: 'main-home',
@@ -14,13 +15,22 @@ import { Component, OnInit } from '@angular/core';
 
 export class HomeComponent implements OnInit {
 
+  public oferta_array: Oferta[] = [];
+
   constructor(private ofertasService: OfertasService) { }
 
-  public ofertas: Oferta[] = [];
-
   ngOnInit(): void {
-    this.ofertas = this.ofertasService.getofertas();
-    console.log(this.ofertas);
-  }
+    //this.oferta_array = this.ofertasService.getOfertas();
+    //console.log(this.oferta_array)
 
+    /* Abaixo dentro do then temos duas arrow function, 
+    uma para o response e outra para o reject */
+
+    /* O segundo parametro do then cai diretamente no catch */
+    this.ofertasService.getOfertas2().then((response: Oferta[]) => {
+      this.oferta_array = response;
+    }).catch((rejected: any) => {
+      console.log(rejected);
+    });
+  }
 }
