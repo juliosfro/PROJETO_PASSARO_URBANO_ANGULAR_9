@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     /* O segundo parametro do then cai diretamente no catch */
     this.ofertasService.getOfertas2().then((response: Oferta[]) => {
       this.oferta_array = response;
+      console.log('response');
     }).catch((rejected: any) => {
       console.log(rejected);
     });

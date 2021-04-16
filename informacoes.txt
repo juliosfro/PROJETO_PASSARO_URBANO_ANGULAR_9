@@ -132,4 +132,39 @@ Promises na prática parte 4 (Reject e catch)
 
  Promises na prática parte 5 (Processamento assíncrono e encadeamento)
 
-- 
+- Podemos encadear vários then um seguido do outro.
+- Uma promise pode ser resolvida na sequencia do método em que foi chamada.
+
+Promises na prática parte 5 (Processamento assíncrono e encadeamento)
+
+- Podemos colocar uma promise dentro de outra promise ocorrendo um encadeamento.
+
+Introdução, instalação e testes do pacote json-server
+
+- Foi instalado o json server de forma global para podermos rodar de qualquer 
+lugar do nosso sistema.
+- Podemos instalar o json-server de forma global com o comando: npm install -g json-server
+- Para rodar o servidor usamos o comando: json-server --watch banco-de-dados.json 
+- http://localhost:3000/ofertas  -> URI
+- Podemos trabalhar com requisições http no json-server como se fosse um banco de dados
+real.
+
+Estratégia de consumo de APIs Rest via Angular HTTP
+
+- Temos de um lado nossa aplicação cliente e do outro nossa aplicação servidor.
+- Para fazer com que um serviço seja injetado dentro de outro serviço nós precisamos 
+utilizar a função decoradora @Injectable.
+- Nós vamos pegar o serviço http do Angular 9 e vamos injetar dentro do nosso serviço
+OfertasService, dessa forma nosso serviço será capaz de fazer requisições http para 
+outras aplicações.
+- O http do Angular retorna um Observable mas nesse momento estamos trabalhando com
+Promise, nós vamos ajustar o retorno para que nossa aplicação não quebre.
+- Vamos entender como usar Promise para consumir API REST.
+- Observable é o retorno padrão do serviço http do Angular.
+- Vamos converter os retornos de Observables para Promise para entendermos como funciona,
+apenas para fins didaticos.
+- O protocolo http é baseado em requisição e resposta.
+
+Injetando o serviço HTTP do Angular como dependência de outros serviços
+
+-xxx...

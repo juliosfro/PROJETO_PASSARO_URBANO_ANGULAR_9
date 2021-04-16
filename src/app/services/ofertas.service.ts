@@ -60,8 +60,11 @@ export class OfertasService {
     public getOfertas2(): Promise<Oferta[]> {
         /* Algum tipo de processamento que ao finalizar chama a funcao resolve ou reject */
         return new Promise((resolve, reject) => {
-            let deu_certo = false;
-            deu_certo ? resolve(this.ofertas) : reject({codigo_erro: 404, mensagem: 'Server Not Found.'});
+            let deu_certo = true;
+            if (deu_certo) {
+                setTimeout(() => resolve(this.ofertas), 3000);
+            }
+            else reject({ codigo_erro: 404, mensagem: 'Server Not Found.' });
         });
     }
 }
