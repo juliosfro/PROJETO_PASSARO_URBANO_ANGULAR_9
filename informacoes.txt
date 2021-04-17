@@ -167,4 +167,68 @@ apenas para fins didaticos.
 
 Injetando o serviço HTTP do Angular como dependência de outros serviços
 
--xxx...
+- Dentro do módulo principal que controla nossos componentes que é o app.module.ts, 
+precisamos referenciar o HttpClientModule do angular e colocar sua referência no 
+arrays de imports.
+- O próximo passo é injetar o service do HttpClient dentro do nosso serviço, dentro da 
+classe de serviços OfertasService injeta-se somente o HttpClient sem o nome Module.
+- Dentro do OfertasService é necessário importar o Injectable, e referenciar @Injectable
+no cabeçalho da classe.
+
+Efetuando requisições HTTP para APIs Rest 
+
+Filtrando ofertas
+
+- Podemos aplicar filtros passando parametros direto na uri da requisição para o Json-Server.
+- return this.http.get<Oferta[]>('http://localhost:3000/ofertas?destaque=true').toPromise();
+- Acima especificamos que queremos somente as ofertas que possuem destaque.
+
+Entendendo a estratégia de implementação do recursos de rotas (Routes)
+
+- Vamos criar mais dois componentes RestauranteComponent e DiversaoComponent.
+- Iremos criar um mapa de rotas dentro da nossa aplicação.
+- No array de rotas especificamos o path e o componente associado ao path, veja abaixo.
+    - { path: 'login', component: LoginComponent }
+
+- O path é o caminho da uri por exemplo /restaurante ou /diversao 
+- Conforme a uri é chamada então o componente é renderizado.
+- Precisamos criar um mapa de rotas e incorporar dentro da classe AppModule.
+
+Criando os componentes Restaurantes e Diversão
+
+- ng g c Restaurante --skipTests=true
+- ng g c Diversao --skipTests=true
+- Os componentes são criados dentro da pasta raíz da aplicação.
+  - /Users/julio/Desktop/appPassaroUrbano
+- Os arquivos do componente são colocados de forma automática dentro da pasta src.
+- Dentro da pasta src é criado uma pasta com o mesmo nome do componente em lowercase.
+
+Criando o mapa de rotas
+
+- Vamos criar um mapa de rotas e vamos associar esse mapa ao AppModule que é a classe 
+principal da nossa aplicação.
+- Dentro do diretório src, /Users/julio/Desktop/appPassaroUrbano/src
+- Criamos uma pasta chamada routes, mkdir routes
+- Dentro da pasta routes criamos o arquivo app.routes.ts, touch app.routes.ts
+- Poderia ser criado um módulo em específico para as rotas.
+- Iremos exportar um mapa de rotas.
+
+- Após a criação do arquivo de rotas devemos referenciar no AppModule que é a classe principal.
+- Devemos importar o módulo RouterModule em AppModule que é o módulo principal.
+- Precisamos passar para o RouterModule o mapa de rotas que criamos.
+- É necessário importar a constante de rotas que está dentro do arquivo app.routes.ts 
+que criamos, veja abaixo.
+    - import { ROUTES } from './../routes/app.routes';
+
+- Por final passamos para o RouterModule a nossa constante que contém um array de rotas.
+    - RouterModule.forRoot(ROUTES)
+
+- O forRoot serve para referenciar as rotas globais da aplicação.
+- O forChild serve para referenciar as rotas internas dentro do componente.
+- Podem haver várias rotas internas dentro de um componente.
+- Temos que dizer ao angular em qual região um componente baseado em determinado path
+deve ser colocado, para fazer isso usamos a tag <router-outlet></router-outlet>.
+
+Estabelecendo a navegação entre rotas
+
+- xxx...
