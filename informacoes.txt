@@ -310,4 +310,20 @@ Recuperando parâmetros da rota com Subscribe
 
 Recuperando a oferta selecionada (HTTP Resquest / API Rest / Promise
 
+- Vamos recuperar a oferta através do id encaminhado na rota.
+
+Processamento assíncrono e a construção do template
+
+- Pode ocorrer do angular renderizar a página mais rápido que ocorre a requisição
+para o banco de dados, então pode ocorrer erro de undefined ou null, por isso é 
+necessário fazer validações quando estamos trabalhando com requisições assíncronas.
+- Veja abaixo um exemplo de validação.
+    - <div class="img_capa" *ngIf="oferta.imagens[0] !== undefined && oferta.imagens[0] !== null">
+
+- No exemplo acima todo conteúdo da div só será renderizado se a condição do if for verdadeira.
+- Nossa aplicação deve ter inteligência para acessar os dados somente quando eles estiverem
+disponíveis.
+
+Ajustando a url de acesso a API
+
 - xxx...

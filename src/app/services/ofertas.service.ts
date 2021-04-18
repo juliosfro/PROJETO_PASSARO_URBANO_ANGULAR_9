@@ -20,6 +20,10 @@ export class OfertasService {
         return this.http.get<Oferta[]>(`http://localhost:3000/ofertas?categoria=${categoria}`).toPromise();
     }
 
+    public getOfertaPorId(id: number): Promise<Oferta[]> {
+        return this.http.get<Oferta[]>(`http://localhost:3000/ofertas?id=${id}`).toPromise();
+    }
+
     /* 
     
         public getOfertasDois(): Promise<Oferta[]> {
