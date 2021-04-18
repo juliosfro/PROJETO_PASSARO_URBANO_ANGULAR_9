@@ -231,4 +231,39 @@ deve ser colocado, para fazer isso usamos a tag <router-outlet></router-outlet>.
 
 Estabelecendo a navegação entre rotas
 
-- xxx...
+- Podemos navegar entre componentes através da diretiva routerLink, veja abaixo:
+    - <a class="nav-link" routerLinkActive="active" [routerLink]="['/diversao']">Diversão</a>
+
+- Podemos descobrir qual é a rota que está ativa e a partir disso tomar uma ação.
+
+Alterando a classe do elemento associado a rota ativa
+
+- Existe uma diretiva chamada routerLinkActive que serve para aplicar classe css ao elemento
+html caso o elemento corresponda a rota ativa.
+-   <a class="nav-link" routerLinkActive="active" [routerLink]="['/diversao']">Diversão</a>
+- Acima active se refere a uma classe do bootstrap que dá estilo ao link que está sendo exibido.
+
+Recuperando ofertas do tipo Restaurante (HTTP Resquest / API Rest / Promise)
+
+- Nossas ofertas serão mostradas de forma dinâmica com base em requisições http que será 
+feita para a api rest.
+
+Recuperando ofertas do tipo Diversao (HTTP Resquest / API Rest / Promise)
+
+Criando e navegando para a página Oferta
+
+- Iremos criar um componente chamado oferta sendo que o objetivo desse componente será mostrar
+a página onde poderemos ver os detalhes das ofertas, cada uma das ofertas permite acesso 
+a uma página contendo seus detalhes.
+- Criamos o componente com o comando: ng g c oferta --skipTests=true
+
+Passando parâmetros na navegação
+
+- Vamos aprender a passar parametros durante a navegação entre as rotas da aplicação.
+- A passagem de parametros é um recurso muito importante pois os parametros servem para
+configurar as tratativas de back-end.
+- Por exemplo no nosso componente oferta nós precisamos receber um parametro que corresponda 
+ao id da oferta clicada para que com base nesse parametro a gente possa configurar a 
+consulta que vamos fazer na nossa API de back-end.
+- Como configuro o path para que ele seja capaz de identificar e receber parametros?
+- Parei em 1:06
