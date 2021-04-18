@@ -1,7 +1,6 @@
 import { Oferta } from './../models/oferta.model';
 import { OfertasService } from './../services/ofertas.service';
 import { Component, OnInit } from '@angular/core';
-import { jsDocComment } from '@angular/compiler';
 
 @Component({
   selector: 'main-home',

@@ -266,4 +266,48 @@ configurar as tratativas de back-end.
 ao id da oferta clicada para que com base nesse parametro a gente possa configurar a 
 consulta que vamos fazer na nossa API de back-end.
 - Como configuro o path para que ele seja capaz de identificar e receber parametros?
-- Parei em 1:06
+- Primeiro temos que indicar para o path como ele deve receber esses parametros.
+- É necessário criar uma nova rota com parametro dentro do path, veja abaixo:
+    -     { path: 'oferta', component: OfertaComponent },
+    -     { path: 'oferta/:id', component: OfertaComponent }
+- Então teremos duas rotas para o mesmo componente, uma que recebe parametro e outra que não.
+- No momento que o path for acessado com a passagem do parametro nós vamos poder recuperar 
+esse parametro dentro do componente que foi chamado, o parametro possuí um aliás, nesse 
+caso ele se chama id.
+- Todos os paths correspodem a uma assinatura única.
+- Abaixo temos ume exemplo de passagem de parametro através do routerLink.
+    - <a [routerLink]="['/oferta', oferta.id]" class="btn btn-outline-primary">Ver oferta</a>
+- Podemos atribuir a diretiva routerLink tanto em botões, links, entre outros elementos do html.
+    - <button class="btn btn-outline-success"[routerLink]="['/oferta', oferta.id]">Ver oferta</button>
+
+Recuperando parâmetros da rota (Snapshot vs Subscribe)
+
+- Snapshot: Tira uma "foto" da rota permitindo acessar seus parametros.
+- Subscribe: Fica "escutando" alterações na rota. Quando uma alteração é "escutada" 
+podemos reagir a mudança (reactive programming).
+- O Snapshot será utilizado na grande maioria das vezes, porque o que faremos é sair 
+de uma rota e entrar em outra.
+- Dentro de uma mesma página se houver um componente que é alterado com base em outro 
+componente então nós podemos utilizar o Subscribe para esse fim.
+- Um exemplo de uso do Subscribe é quando há uma rota fixa e dentro dessa rota houver 
+dois componentes e seja necessário comunicação entre esses componentes.
+
+Recuperando parâmetros da rota com Snapshot
+
+- OfertaComponent receberá como parametro o id da oferta através de Snapshot.
+    - const id = this.route.snapshot.paramMap.get('id');
+- Precisamos colocar uma variavel do tipo ActivatedRoute dentro do construtor do componente
+que vai receber o parametro.
+- Podemos receber mais de um parametro na rota, podemos receber um array de parametros.
+
+Recuperando parâmetros da rota com Subscribe
+
+- Um Subscribe pode retornar string ou null.
+- Vamos declarar uma variavel chamada id_oferta.
+    -  id_oferta: string | null = null;
+- Abaixo capturamos o valor do parametro id vindo na uri através do subscribe.
+    - this.route.paramMap.subscribe(parametro => this.id_oferta = parametro.get('id'));
+
+Recuperando a oferta selecionada (HTTP Resquest / API Rest / Promise
+
+- xxx...
