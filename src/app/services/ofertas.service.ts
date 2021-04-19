@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Oferta } from './../models/oferta.model';
 import { Injectable } from '@angular/core';
+import { URL_API_OFERTAS } from '../constants/app.api.constants';
 
 @Injectable()
 export class OfertasService {
 
     public ofertas: Oferta[] = [];
+    private uri_api_ofertas = URL_API_OFERTAS;
 
     constructor(private http: HttpClient) {
 
@@ -13,15 +15,15 @@ export class OfertasService {
 
     public getOfertas(): Promise<Oferta[]> {
         /* Efetuar uma requisicao http e retornar uma promessa contendo um Oferta[] */
-        return this.http.get<Oferta[]>('http://localhost:3000/ofertas?destaque=true').toPromise();
+        return this.http.get<Oferta[]>(`${this.uri_api_ofertas}?destaque=true`).toPromise();
     }
 
     public getOfertasPorCategoria(categoria: string): Promise<Oferta[]> {
-        return this.http.get<Oferta[]>(`http://localhost:3000/ofertas?categoria=${categoria}`).toPromise();
+        return this.http.get<Oferta[]>(`${this.uri_api_ofertas}?categoria=${categoria}`).toPromise();
     }
 
     public getOfertaPorId(id: number): Promise<Oferta[]> {
-        return this.http.get<Oferta[]>(`http://localhost:3000/ofertas?id=${id}`).toPromise();
+        return this.http.get<Oferta[]>(`${this.uri_api_ofertas}?id=${id}`).toPromise();
     }
 
     /* 

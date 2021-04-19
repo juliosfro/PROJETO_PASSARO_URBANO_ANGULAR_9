@@ -326,4 +326,71 @@ disponíveis.
 
 Ajustando a url de acesso a API
 
+- Para evitar repetição de código dentro de nossa aplicação, por exemplo o endereço da 
+URI de acesso aos dados da nossa api rest.
+- Podemos criar um atributo na classe de serviço OfertasService como privado e atribuir o 
+endereço da uri de ofertas para ele.
+- Veja abaixo.
+    - private uri_api_ofertas = 'http://localhost:3000/ofertas';
+- Podem haver vários serviços separados em módulos diferentes.
+- O mais indicado é criar um arquivo com todas as URI`s do nosso projeto para facilitar
+manutenções posteriores.
+- O mais certo é isolar o path das URI`s em um arquivo e exportar todas as constantes que
+estão nesse arquivo, cada arquivo representa um módulo que pode ser importado.
+
+Criando as tabs "Como usar" e "Onde fica"?
+
+- Vamos implementar um sistema de navegação interno, nós já aprendemos a criar um sistema 
+de navegação forRoot() para a aplicação como um todo, agora vamos descobrir como podemos 
+implementar um sistema de navegação forChild() dentro de um componente.
+- Em geral esse tipo de recurso é utilizado para facilitar a interação entre componentes
+parents.
+- É necessário estruturar o layout.
+- O componente Oferta terá um router-outlet filho.
+
+Criando os componentes ComoUsarComponent e OndeFicaComponent
+
+- Os dois componentes que iremos criar fazem parte do componente oferta, pois eles 
+serão renderizados sob demanda dentro do componente oferta.
+- Os dois componentes serão criados dentro do diretório do componente oferta, no meu 
+caso eu vou criar fora, criarei em /src/app
+- Os dois componentes serão criados com o comando abaixo:
+    -  ng g c ComoUsar --skipTests=true
+    -  ng g c OndeFica --skipTests=true
+
+Configurando rotas filhas
+
+- Como montar um sistema de roteamento interno?
+- Vamos criar rotas filhas dentro do componente Oferta, para isso é necessário ir 
+no arquivo de rotas onde contém o array de rotas.
+- Dentro do path da rota principal vamos adicionar a propriedade children, veja abaixo:
+
+-       path: 'oferta/:id', component: OfertaComponent,
+        children: [{ path: 'como-usar', component: ComoUsarComponent },
+        { path: 'onde-fica', component: OndeFicaComponent }]
+
+- É necessário referenciar router-outlet aonde queremos exibir o conteúdo que queremos
+dentro do template html do componente Oferta.
+- Quando efetuamos o acesso direto para a rota Oferta o router-outlet não sabe qual componente
+irá renderizar, se é o ComoUsarComponent ou o OndeFicaComponent.
+- Para resolver isso precisamos indicar que se nenhum parametro for passado deve-se ir para 
+a rota raíz que no caso será o primeiro componente a ser exibido, no nosso caso o ComoUsarComponent.
+- O próximo passo é implementar a navegação entre os componentes.
+
+Navegando entre as rotas filhas como-usar e onde-fica
+
+- Vamos navegar entre os componentes através dos links contidos nas tabs.
+- <a class="nav-link active" routerLink="como-usar" data-toggle="tab" role="tab" aria-selected="true">Como usar</a>
+
+Recuperando parâmetros da rota parent (pai) nas rotas filhas
+
+- Teremos que pegar o id da oferta que está na rota forRoot() e passar para a rota
+forChild() para que os componentes OndeFicaComponent e como ComoUsarComponent façam 
+buscas na api rest e rendezirem as informações no seu respectivo template (arquivo html).
+- Para fazer busca nos parametros da rota pai (parent) usamos o seguinte comando:
+    - this.route.parent?.paramMap.subscribe(param => this.id_oferta = param.get('id'));
+- route é uma instância de ActivatedRoute declarado dentro do construtor do componente filho.
+
+Recuperando dados "Como usar" via HTTP Request
+
 - xxx...
