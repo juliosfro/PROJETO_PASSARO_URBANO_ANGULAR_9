@@ -1,3 +1,6 @@
+import { OndeFica } from './../models/onde-fica.model';
+import { ComoUsar } from './../models/como-usar.model';
+import { URL_API_COMO_USAR, URL_API_ONDE_FICA } from './../constants/app.api.constants';
 import { HttpClient } from '@angular/common/http';
 import { Oferta } from './../models/oferta.model';
 import { Injectable } from '@angular/core';
@@ -8,6 +11,8 @@ export class OfertasService {
 
     public ofertas: Oferta[] = [];
     private uri_api_ofertas = URL_API_OFERTAS;
+    private uri_api_como_usar = URL_API_COMO_USAR;
+    private uri_api_onde_fica = URL_API_ONDE_FICA;
 
     constructor(private http: HttpClient) {
 
@@ -24,6 +29,14 @@ export class OfertasService {
 
     public getOfertaPorId(id: number): Promise<Oferta[]> {
         return this.http.get<Oferta[]>(`${this.uri_api_ofertas}?id=${id}`).toPromise();
+    }
+
+    public getComoUsarOfertaPorId(id: number): Promise<ComoUsar[]> {
+        return this.http.get<ComoUsar[]>(`${this.uri_api_como_usar}?id=${id}`).toPromise();
+    }
+
+    public getOndeFicaOfertaPorId(id: number): Promise<OndeFica[]> {
+        return this.http.get<OndeFica[]>(`${this.uri_api_onde_fica}?id=${id}`).toPromise();
     }
 
     /* 

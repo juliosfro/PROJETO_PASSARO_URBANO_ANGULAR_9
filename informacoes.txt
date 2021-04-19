@@ -393,4 +393,8 @@ buscas na api rest e rendezirem as informações no seu respectivo template (arq
 
 Recuperando dados "Como usar" via HTTP Request
 
-- xxx...
+- Para recuperar os dados é o processo normal através do service de ofertas.
+
+ Introdução a Reactive Programming
+
+ - xxx...
