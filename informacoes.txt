@@ -397,4 +397,56 @@ Recuperando dados "Como usar" via HTTP Request
 
  Introdução a Reactive Programming
 
- - xxx...
+ - Consiste em um paradigma de programação voltado a fluxos.
+ - O switchMap serve para que, por exemplo, se você fizer 5 requisições, ele irá processar 
+apenas a última delas, que é a que realmente importa para nós, construiremos nosso objeto
+uma vez e substituiremos o array somente uma vez. Resumindo: usando switchMap todos os 
+requests anteriores serão ignorados se um novo evento chegar.
+- Reduzir o número de chamadas de API para seu servidor usando debounceTime.
+
+Introdução a Observables
+
+- Observable é o recurso utilizado pelo Angular para atender de modo efetivo aos pilares
+da programação reativa.
+- Observable é um recurso da lib rxjs que está disponível para diversas linguagens inclusive
+JavaScript.
+- Observables trabalham em cima de tarefas assíncronas de forma parecida com as promises.
+- Observable é capaz de lidar com: instrução, erro e conclusão.
+
+Observables na prática parte 2 - Interval operator
+
+- interval é uma propriedade da classe Subscribe que define o que ocorrerá em 
+um intervalo de tempo baseado em milisegundos.
+- Podemos enviar requisições para um servidor a cada 2 segundos por exemplo.
+
+Observables na prática parte 4 - Finalizando stream com error() e ou complete()
+
+- Podemos parar um observable com o método error.
+- Podemos concluir uma operação com o método complete.
+- Um subscribe possuí três parametros.
+
+Observables na prática parte 5 - Memory leak e Unsubscribe
+
+- Memory leak significa vazamento de memória.
+- Para evitar memory leak uma alternativa é utilizar a interface OnDestroy e implementar
+o método ngOnDestroy().
+- Dentro do método ngOnDestroy() devemos efetuar o unsubscribe nos observables.
+
+Incluindo o campo de pesquisa de ofertas
+
+- Criaremos um campo para filtrar as ofertas de forma dinamica, fazendo com que ao 
+digitar caracteres o filtro seja executado.
+- Para o event binding [(ngModel)]="user.nome" funcionar deve ser importado o módulo 
+FormsModule em app.module.ts que é a classe principal AppModule.
+- Podemos criar variáveis locais dentro de tags do html usando cerquilha, por exemplo:
+    -  <input type="text" class="form-control mt-3" placeholder="Pesquise por ofertas" #termoPesquisa
+            (keyup)="pesquisa(termoPesquisa.value)" />
+
+- No caso acima a propriedade value está no contexto da variavel local dentro do input, 
+ela esta pegando o valor digitado dentro do input e passando como argumento para a função
+pesquisa.
+- A forma mais apropriada é usar event binding ao invés do mostrado acima.
+
+Criando um Observable para pesquisa de ofertas em OfertasService
+
+- xxx...

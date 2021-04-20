@@ -18,10 +18,10 @@ export class OfertaComponent implements OnInit {
 
   ngOnInit(): void {
     /* Recuperacao do parametro id vindo na URI atraves de snapshot */
-    this.id_oferta = this.route.snapshot.paramMap.get('id');
+    // this.id_oferta = this.route.snapshot.paramMap.get('id');
 
     /* Recuperacao do parametro id vindo na URI atraves de subscribe */
-    // this.route.paramMap.subscribe(parametro => this.id_oferta = parametro.get('id'));
+    this.route.paramMap.subscribe(parametro => this.id_oferta = parametro.get('id'));
 
     if (this.id_oferta !== null) {
       this.ofertasService.getOfertaPorId(parseInt(this.id_oferta)).then((response: Oferta[]) => {
