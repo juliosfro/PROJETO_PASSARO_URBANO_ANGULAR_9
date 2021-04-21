@@ -1,10 +1,11 @@
 import { OndeFica } from './../models/onde-fica.model';
 import { ComoUsar } from './../models/como-usar.model';
 import { URL_API_COMO_USAR, URL_API_ONDE_FICA } from './../constants/app.api.constants';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Oferta } from './../models/oferta.model';
 import { Injectable } from '@angular/core';
 import { URL_API_OFERTAS } from '../constants/app.api.constants';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class OfertasService {
@@ -39,8 +40,11 @@ export class OfertasService {
         return this.http.get<OndeFica[]>(`${this.uri_api_onde_fica}?id=${id}`).toPromise();
     }
 
+    public getPesquisaOfertasPorNome(termo: string): Observable<HttpResponse<Oferta[]>> {
+        return this.http.get<Oferta[]>(`${this.uri_api_ofertas}?descricao_oferta_like=${termo}`, { observe: 'response' });
+    }
+
     /* 
-    
         public getOfertasDois(): Promise<Oferta[]> {
            // Algum tipo de processamento que ao finalizar chama a funcao resolve ou reject 
             return new Promise((resolve, reject) => {

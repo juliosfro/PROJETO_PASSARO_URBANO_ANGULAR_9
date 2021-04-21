@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Imagem } from './imagem.model';
 export class Oferta {
 
@@ -9,7 +10,7 @@ export class Oferta {
     public valor: number = 0;
     public destaque: boolean = false;
     public imagens: Array<Imagem> = [];
-   
+  
     constructor() {
     }
 

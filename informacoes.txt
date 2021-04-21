@@ -449,4 +449,20 @@ pesquisa.
 
 Criando um Observable para pesquisa de ofertas em OfertasService
 
-- xxx...
+- Após sabermos como que se recupera o termo que desejamos buscar agora vamos criar
+o serviço para buscar a oferta no banco de dados.
+- Vamos buscar as ofertas no banco de dados utilizando o padrão observable.
+- Como usar o like no Json-Server?
+- Para usarmos o like no Json-Server colocamos o _like concatenado no 
+nome do atributo que está no banco de dados na uri de pesquisa, veja abaixo:
+    - public getPesquisaOfertasPorNome(termo: string): Observable<Oferta[]> {
+        return this.http.get<Oferta[]>(`${this.uri_api_ofertas}?descricao_oferta_like=${termo}`);
+    }
+
+Lógica da pesquisa de ofertas parte 1 - Executando pesquisaOfertas
+
+- Uma api pode ter diferentes formas de lidar com requisições http.
+
+Lógica da pesquisa de ofertas parte 2 - Erro e Retry Operator
+
+- 
