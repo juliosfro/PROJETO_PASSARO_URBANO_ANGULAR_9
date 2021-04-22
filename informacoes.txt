@@ -465,4 +465,37 @@ Lógica da pesquisa de ofertas parte 1 - Executando pesquisaOfertas
 
 Lógica da pesquisa de ofertas parte 2 - Erro e Retry Operator
 
-- 
+- O retry pode ser utilizado em conjunto com o delay para fazer tentativas de
+acesso a requisições http de modo sequencial, ou com intervalo de tempo.
+
+- O map pode ser usado como um mecanismo de transformação de dados.
+- Handles são formas de lidar com os eventos.
+
+Lógica da pesquisa de ofertas parte 4 - Subject e switchMap
+
+- Programação Reativa é um paradigma, algumas soluções não podem ser interpretadas como
+soluções orientada a objetos ou funcionais.
+- Podemos disparar requisições a cada 2 segundos em um campo de pesquisa para dar 
+tempo de o usuário digitar o termo de pesquisa.
+- Vamos criar um Observable capaz de gerenciar os eventos que estão sendo produzidos 
+dentro de nossa aplicação.
+
+Subject: 
+    - Funciona como um proxy atuando tanto como observável quanto observador.
+
+switchMap:
+    - Permite recuperar parametros que são enviados ao subject e executar um observable.
+    - O switchMap irá sequenciar a execução dos observables fazendo com que os observables
+    anteriores sejam cancelados, ou seja, ele faz um unsubscribe do observable de forma 
+    automática mantendo apenas o observable mais recente.
+
+Lógica da pesquisa de ofertas parte 5 - DebounceTime
+
+- Podemos implementar lógicas para disparar os observables.
+- Vamos aplicar um determinado tempo para o observable de pesquisa ser executado.
+- Um único evento será disparado após determinado tempo.
+- Com isso a aplicação consumirá menos recursos de processamento.
+
+Lógica da pesquisa de ofertas parte 6 - Evitando pesquisas por strings vazias
+
+- xxx...
