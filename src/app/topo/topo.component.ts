@@ -2,7 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Oferta } from './../models/oferta.model';
 import { OfertasService } from './../services/ofertas.service';
 import { Component, OnInit } from '@angular/core';
-import { debounceTime, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -15,7 +15,8 @@ export class TopoComponent implements OnInit {
 
   termoPesquisa: string = '';
   oferta: Oferta = new Oferta();
-  ofertas: HttpResponse<Oferta[]> | undefined;
+  ofertaDetails: Array<Oferta> = [];
+  ofertas: HttpResponse<Oferta[]> = new HttpResponse<Oferta[]>();
 
   private _subjectPesquisa: Subject<string> = new Subject<string>();
 
@@ -23,19 +24,29 @@ export class TopoComponent implements OnInit {
 
   ngOnInit(): void {
     /* A pesquisa aguardara o usuario por 1 segundo para ele digitar o termo */
-    this._subjectPesquisa.pipe(debounceTime(1000), switchMap((termo: string) =>
+    this._subjectPesquisa.pipe(debounceTime(500), distinctUntilChanged(), switchMap((termo: string) =>
       this.ofertasService.getPesquisaOfertasPorNome(termo)))
       .subscribe((response: HttpResponse<Oferta[]>) => {
-        this.ofertas = response
-        console.log(response);
+        this.ofertas = response;
+        this.ofertaDetails = response.body !== null ? response.body : this.ofertaDetails;
+        // console.log(response);
+      }, error => {
+        console.log(`Não há conexão com o servidor, código: ${error.status}`);
       });
+
   }
 
   pesquisa(): void {
+
     console.log(this.termoPesquisa);
-    this._subjectPesquisa.next(this.termoPesquisa);
-
-
+    if (this.termoPesquisa.trim() !== ''
+      && this.termoPesquisa !== undefined
+      && this.termoPesquisa !== null) {
+      // alert('pesquisa')
+      this._subjectPesquisa.next(this.termoPesquisa);
+    } else if (this.termoPesquisa === null || this.termoPesquisa.trim() === '') {
+      this.ofertaDetails = [];
+    }
 
 
     // this.ofertasService.getPesquisaOfertasPorNome(this.termoPesquisa).subscribe((response: HttpResponse<Oferta[]>) => {

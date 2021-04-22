@@ -497,5 +497,25 @@ Lógica da pesquisa de ofertas parte 5 - DebounceTime
 - Com isso a aplicação consumirá menos recursos de processamento.
 
 Lógica da pesquisa de ofertas parte 6 - Evitando pesquisas por strings vazias
+    
+- Basta fazer um if para verificar se o termo de pesquisa esta preenchido.
 
-- xxx...
+Lógica da pesquisa de ofertas parte 7 - DistinctUntilChanged
+
+- Serve para verificar se a pesquisa atual é igual a pesquisa anterior.
+- Se a pesquisa atual for igual a anterior a execução do método switchMap será 
+desconsiderada, ou seja, não ocorrerá uma nova pesquisa no banco de dados.
+
+Lógica da pesquisa de ofertas parte 8 - Catch
+
+- O catch serve para capturar a exceção ocorrida e a partir dele pode ser feito o 
+tratamento da exceção ocorrida. 
+
+Lógica da pesquisa de ofertas parte 9 - Trabalhando o template
+
+- Podemos fazer várias validações no template como por exemplo verificar se o campo 
+está preenchido antes de mostrar um resultado.
+
+O que são Pipes?
+
+- São mecanismos de transformação...
