@@ -12,7 +12,7 @@ Instalando o Bootstrap, JQuery e Tether no projeto
 
 - npm install bootstrap@4.5.3 --save
 - npm install jquery@3.5.1 --save
-- npm install popper.js@1.14.3 --save
+- npm install popper.js@1.16.1 --save
 - npm install tether@2.0.0 --save
 
 - Após a instalação é necessário referenciar no arquivo angular.json os arquivos de estilo
@@ -634,4 +634,20 @@ as propriedades de oferta na tela.
 
  [Fix Bootstrap] - Ajustando a versão de alpha para beta
 
- - xxx...
+ - É importante manter as dependências sempre coerentes umas com as outras.
+ - O tether foi descontinuado e substituido pelo popper.js.
+ 
+ Criando e navegando para página OrdemCompra
+
+ - Vamos criar um novo componente chamado ordem de compra (OrdemCompra).
+ - Além de criar o componente vamos implementar a navegação até ele.
+ - No diretório Users/julio/Desktop/appPassaroUrbano/src/app
+    - ng g c OrdemCompra --skipTests=true
+
+- Criamos o componente OrdemCompra.
+- O próximo passo é referenciar a rota para o novo componente no arquivo de rotas.
+
+Entendendo a dinâmica de formulários em SPA
+
+- SPA significa Single Page Application.
+- xxx...
