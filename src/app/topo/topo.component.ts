@@ -3,7 +3,7 @@ import { Oferta } from './../models/oferta.model';
 import { OfertasService } from './../services/ofertas.service';
 import { Component, OnInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Component({
   selector: 'main-topo',
@@ -14,22 +14,29 @@ import { Subject } from 'rxjs';
 export class TopoComponent implements OnInit {
 
   termoPesquisa: string = '';
-  oferta: Oferta = new Oferta();
   ofertaDetails: Array<Oferta> = [];
-  ofertas: HttpResponse<Oferta[]> = new HttpResponse<Oferta[]>();
+  /* Pode ser usado em conjunto com o pipe async */
+  public oferta_array: Observable<Oferta[]> = new Observable<Oferta[]>();
+  /* Nao eh possivel utilizar em conjunto com o pipe async */
+  public array_ofertas_promise: Promise<HttpResponse<Oferta[]>> | any;
+
+  /* Pode ser utilizado somente com o ngFor mas nao permite pipe async */
+  ofertaResponseHttp: HttpResponse<Oferta[]> = new HttpResponse<Oferta[]>();
 
   private _subjectPesquisa: Subject<string> = new Subject<string>();
 
   constructor(private ofertasService: OfertasService) { }
 
   ngOnInit(): void {
+
     /* A pesquisa aguardara o usuario por 1 segundo para ele digitar o termo */
     this._subjectPesquisa.pipe(debounceTime(500), distinctUntilChanged(), switchMap((termo: string) =>
       this.ofertasService.getPesquisaOfertasPorNome(termo)))
       .subscribe((response: HttpResponse<Oferta[]>) => {
-        this.ofertas = response;
+
         this.ofertaDetails = response.body !== null ? response.body : this.ofertaDetails;
-        // console.log(response);
+        // this.ofertaResponseHttp = response;
+
       }, error => {
         console.log(`Não há conexão com o servidor, código: ${error.status}`);
       });
@@ -38,7 +45,6 @@ export class TopoComponent implements OnInit {
 
   pesquisa(): void {
 
-    console.log(this.termoPesquisa);
     if (this.termoPesquisa.trim() !== ''
       && this.termoPesquisa !== undefined
       && this.termoPesquisa !== null) {
@@ -64,5 +70,10 @@ export class TopoComponent implements OnInit {
 
     //   /* Terceiro parametro eh a conclusao */
     // }, () => console.log(`Fluxo de eventos completo`));
+  }
+
+  limpaPesquisa(): void {
+    this.termoPesquisa = '';
+    this._subjectPesquisa.next('');
   }
 }

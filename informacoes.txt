@@ -580,4 +580,58 @@ por exemplo.
 
 Criando um pipe customizado parte 2 - Configurando parâmetros
 
-- xxx...
+- Podemos encaminhar parametros para o pipe para que ele possa fazer a saída dos dados.
+    <li class="list-group-item" *ngFor="let oferta of ofertaDetails">{{oferta.titulo | uppercase |
+        descricaoReduzida:3}}</li>
+
+- Parametros podem ser encaminhados colocando | nomeDoPipe:Parametro 
+- Podemos passar mais de um parametro dessa forma: | nomeDoPipe:Param1:Param2:Param3
+
+Encadeando múltiplos pipes
+
+- Podemos chamar um pipe na sequencia do outro, o segundo pipe irá pegar o resultado da saída
+de dados do primeiro.
+
+    - {{ oferta.titulo | uppercase | descricaoReduzida:8 }}
+
+Pipe async (Inscrição em Observables e Promises)
+
+- O pipe async serve para fazer com que dados do template se inscrevam diretamente em observables
+ou promises.
+- Qualquer informação a ser exibida no template proveniente de um processamento assíncrono pode 
+ser diretamente conectado com o retorno do processamento do pipe.
+- O | async serve para fazer subscribe em observable e promise a partir do template.
+   
+    - public oferta_array: Observable<Oferta[]> = new Observable<Oferta[]>();
+
+    -  <li class="list-group-item" *ngFor="let oferta of oferta_array | async">{{oferta.titulo | uppercase |
+             descricaoReduzida:8}}</li>
+        
+- O pipe async consegue extrair os dados do array de ofertas de dentro do observable e renderizar
+as propriedades de oferta na tela.
+- Podemos usar o ngFor em conjunto com uma resposta http da seguinte forma:
+
+    <ul class="list-group" style="position: absolute; width: 95%;" *ngIf="termoPesquisa.trim() !== '' ">
+            <li class="list-group-item" *ngFor="let oferta of ofertaResponseHttp.body">{{oferta.titulo |
+                    uppercase |
+                    descricaoReduzida:8}}</li>
+    </ul>
+
+ Navegando para oferta a partir do campo de pesquisa
+
+ - Vamos aprender como acessar os dados das ofertas retornadas na pesquisa.
+ 
+ Atualizando oferta no processo de mudança de rota
+
+ - Os componentes devem ser atualizados no momento em que ocorre o snapshot na rota.
+ - Quando for detectado alguma mudança de rota o componente da oferta deve ser carregado.
+ - A chamada deve ser feita dentro do corpo do subscribe que está recuperando o id.
+ 
+ Atualizando "como usar" e "onde fica" no processo de mudança de rota
+
+ - Todo o processo deve ser feito dentro do corpo do subscribe que está capturando 
+ o id da rota como parametro, tanto para como-usar quanto para onde-fica.
+
+ [Fix Bootstrap] - Ajustando a versão de alpha para beta
+
+ - xxx...

@@ -21,15 +21,17 @@ export class OfertaComponent implements OnInit {
     // this.id_oferta = this.route.snapshot.paramMap.get('id');
 
     /* Recuperacao do parametro id vindo na URI atraves de subscribe */
-    this.route.paramMap.subscribe(parametro => this.id_oferta = parametro.get('id'));
+    /* Toda vez que houver uma mudanca na rota a oferta sera atualizada na tela */
+    this.route.paramMap.subscribe(parametro => {
+      this.id_oferta = parametro.get('id');
+      if (this.id_oferta !== null) {
+        this.ofertasService.getOfertaPorId(parseInt(this.id_oferta)).then((response: Oferta[]) => {
+          const oferta = response.shift();
+          oferta !== undefined ? this.oferta = oferta : this.oferta;
+        });
+      }
 
-    if (this.id_oferta !== null) {
-      this.ofertasService.getOfertaPorId(parseInt(this.id_oferta)).then((response: Oferta[]) => {
-        const oferta = response.shift();
-        oferta !== undefined ? this.oferta = oferta : this.oferta;
-      });
-    }
-
+    });
   }
 
 }

@@ -13,9 +13,15 @@
 
                     <!-- <input type="text" class="form-control mt-3" placeholder="Pesquise por ofertas" #termoPesquisa
                         (keyup)="pesquisa(termoPesquisa.value)" /> -->
-                    <ul class="list-group" style="position: absolute; width: 95%;" *ngIf="termoPesquisa.trim() !== '' ">
-                        <li class="list-group-item" *ngFor="let oferta of ofertaDetails">{{oferta.titulo | uppercase |
-                            descricaoReduzida}}</li>
+                    <ul class="list-group" style="position: absolute; width: 95%; z-index: 999;"
+                        *ngIf="termoPesquisa.trim() !== '' ">
+                        <li class="list-group-item" *ngFor="let oferta of ofertaDetails">
+                            <a [routerLink]="['/oferta', oferta.id]" (click)="limpaPesquisa()">
+                                {{oferta.titulo |
+                                uppercase |
+                                descricaoReduzida:16}}
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-2 mt-2 d-flex">

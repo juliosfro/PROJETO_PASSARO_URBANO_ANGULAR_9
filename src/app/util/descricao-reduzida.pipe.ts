@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DescricaoReduzida implements PipeTransform {
 
     /* Vamos truncar na 15 posicao e concatenar ... */
-    transform(value: string): string {
-        return value.length > 15 ? value.substr(0, 15) + '...' : value;
+    transform(value: string, truncarEm: number = 15): string {
+        return value.length > truncarEm ? value.substr(0, truncarEm) + '...' : value;
     }
 }

@@ -17,14 +17,18 @@ export class ComoUsarComponent implements OnInit {
   constructor(private route: ActivatedRoute, private ofertasService: OfertasService) { }
 
   ngOnInit(): void {
-    this.route.parent?.paramMap.subscribe(param => this.id_oferta = param.get('id'));
+    this.route.parent?.paramMap.subscribe(param => {
+      this.id_oferta = param.get('id');
+      
+      if (this.id_oferta !== null) {
+        this.ofertasService.getComoUsarOfertaPorId(parseInt(this.id_oferta)).then((response: ComoUsar[]) => {
+          this.comoUsar = response[0];
+        });;
 
-    if (this.id_oferta !== null) {
-      this.ofertasService.getComoUsarOfertaPorId(parseInt(this.id_oferta)).then((response: ComoUsar[]) => {
-        this.comoUsar = response[0];
-      });;
+      }
 
-    }
+    });
+
   }
 
 }
