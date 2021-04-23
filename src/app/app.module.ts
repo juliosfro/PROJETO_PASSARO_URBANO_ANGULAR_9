@@ -1,6 +1,7 @@
+import { DescricaoReduzida } from './util/descricao-reduzida.pipe';
 import { ROUTES } from './../routes/app.routes';
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,12 @@ import { OfertaComponent } from './oferta/oferta.component';
 import { ComoUsarComponent } from './como-usar/como-usar.component';
 import { OndeFicaComponent } from './onde-fica/onde-fica.component';
 import { FormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+
+registerLocaleData(localePt);
+
 
 @NgModule({
   declarations: [
@@ -25,7 +32,8 @@ import { FormsModule } from '@angular/forms';
     DiversaoComponent,
     OfertaComponent,
     ComoUsarComponent,
-    OndeFicaComponent
+    OndeFicaComponent,
+    DescricaoReduzida
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,12 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

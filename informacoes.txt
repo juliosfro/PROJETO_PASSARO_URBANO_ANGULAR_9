@@ -518,4 +518,66 @@ está preenchido antes de mostrar um resultado.
 
 O que são Pipes?
 
-- São mecanismos de transformação...
+- São mecanismos de transformação de dados utilizados nos templates para produzir uma 
+representação customizada da informação a ser exibida.
+- Podemos usar pipes para informar ao angular como determinado dado pode ser modificado e 
+consequentemente exibido.
+- Podemos usar | uppercase para todos os caracteres serem exibidos em caixa alta.
+- Com pipes podemos tranformar o output de dados em nossas views.
+- Possibilita deixar a informação para o usuário final mais amigavel.
+- Podemos criar nossos próprios pipes "|".
+
+Usando os pipes json, uppercase e lowercase
+
+- Veja abaixo um exemplo:
+    <li class="list-group-item" *ngFor="let oferta of ofertaDetails">{{oferta.titulo | uppercase}}</li>
+
+Ajustando a formatação de moedas para o padrão Brasileiro (internacionalização)
+
+- O primeiro passo é instalar o intl para prover nosso serviço de formatação.
+- npm install --save intl@1.2.5
+- É necessário fazer o import no arquivo polyfills.ts dos seguintes módulos:
+    
+    import 'intl';
+    import 'intl/locale-data/jsonp/pt-BR';
+
+- O próximo passo é configurar no módulo principal da aplicação.
+- Como nossa aplicação tem um único módulo então fica mais fácil, vamos abrir o arquivo
+app.module.ts e adicionar as configurações.
+    
+    import { registerLocaleData } from '@angular/common';
+    import localePt from '@angular/common/locales/pt';
+
+    registerLocaleData(localePt);
+
+- Configurar dentro do array de providers:
+
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR'
+    }
+
+Criando um pipe customizado parte 1 - Criando e utilizando
+
+- Cada pipe implementa uma lógica interna para poder trabalhar determinada informação.
+- Existe uma série de pipes que já estão pré-definidos no Angular.
+- Podemos desenvolver pipes "|" para atender as nossas necessidades.
+- Podemos usar um pipe para truncar uma string para não estourar uma caixa de layout 
+por exemplo.
+- Podemos criar um pipe e usar sempre que necessário.
+
+    - mkdir util
+    - cd util
+    - touch descricao-reduzida.pipe.ts
+
+- Devemos implementar a interface PipeTransform
+
+    @Pipe({ name: 'descricaoReduzida', pure: true })
+    export class DecricaoReduzida implements PipeTransform 
+
+- Após a criação do pipe devemos declará-lo no módulo.
+    import { DescricaoReduzida } from './util/descricao-reduzida.pipe';
+
+Criando um pipe customizado parte 2 - Configurando parâmetros
+
+- xxx...
