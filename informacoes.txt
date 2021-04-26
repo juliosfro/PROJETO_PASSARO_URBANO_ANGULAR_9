@@ -650,4 +650,55 @@ as propriedades de oferta na tela.
 Entendendo a dinâmica de formulários em SPA
 
 - SPA significa Single Page Application.
-- xxx...
+- A aplicação pode gerenciar tanto a requisição quanto a resposta se haver necessidade
+de dar um refresh na página.
+- Action e method não precisam ser definidos no template html.
+- O angular disponibiliza diferentes técnicas para implementação de formulários.
+- Abordagem para recuperação / controle dos dados do formulário
+    - Two-Way binding
+    - Template Forms
+    - Reactive Forms
+
+- Primeiro vamos ver a implementação básica que é Two-Way binding.
+
+Impedindo a validação de formulários pelo navegador (novalidate)
+
+- Os navegadores (browsers) podem usar recursos do html5 para fazer validações de formulários.
+- O atributo novalidate diz ao navegador que não queremos que ele se responsabilize pela 
+validação do formulário, isso da a capacidade de levar o controle de validação para dentro do 
+código, com isso podemos responder com um feed-back visual único para todos os navegadores.
+    - <form novalidate> 
+
+- Na abertura da tag do form colocamos o atributo no novalidate.
+
+Two-Way-Binding dos dados do formulário
+    
+- Utilizamos [(ngModel)] para fazer o Two Way Data Binding de conteudo entre o template e o typescript.
+    <input type="text" class="form-control" name="complemento" [(ngModel)]="complemento" placeholder="Complemento"
+        autocomplete="off">
+
+Validando dados do formulário parte 1 - Aplicando feedback visual nos campos
+
+- A idéia é o formulário ser submetido para o servidor somente depois de sua validação.
+- Vamos tratar a questão do feed-back visual, ou seja, da forma como apresentamos para o usuário
+campos com preenchimentos válidos e inválidos.
+- O Bootstrap possuí algumas classes para aplicar estilos em campos válidos ou inválidos.
+- A classe deve ser aplicada ao campo através de um teste (validação).
+
+Validando dados do formulário parte 2 - Controlando estado primitivo dos campos
+
+- Estado primitivo é o estado inicial do formulário, antes do usuário interagir com qualquer um 
+dos elementos, por exemplo, um campo de cpf pode ter três estados, no primeiro estado que é o 
+primitivo podemos requerer que o campo seja preenchido, no segundo estado podemos dizer se as informações
+inseridas são inválidas e no terceiro estado podemos retornar uma mensagem de ok.
+- Normalmente é trabalhado com dois estados, o primeiro com a mensagem de campo requerido e o 
+segundo exibindo uma de mensagem de ok ou nenhuma mensagem.
+
+Validando dados do formulário parte 3 - Exibindo mensagens de suporte
+
+- Podemos exibir as mensagens de suporte usando ngIf para fazer as validações.
+
+Validando dados do formulário parte 4 - Controlando botão "Confirmar compra"
+
+- Podemos habilitar o botão de submissão do formulário somente se todos os campos estiverem válidos.
+- 

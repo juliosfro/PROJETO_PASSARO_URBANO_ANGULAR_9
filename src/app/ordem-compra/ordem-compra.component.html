@@ -1,109 +1,140 @@
 <div class="container" style="padding-top: 5%; padding-bottom: 10%;">
-    <div class="ordem-compra">
-      <form>
-      
-        <h5>Sua Compra</h5>
-        <hr />
-  
-        <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
-          <div class="form-group col-sm-1">
-            <img src="/assets/ofertas/1/img1.jpg" class="img-fluid">
-          </div>
-          <div class="form-group col-sm-6">
-            Super Burger
-            <br />
-            Rodízio de Mini-hambúrger com opção de entrada.
-          </div>
-  
-          <div>
-            <div class="row">
-              <div class="col">
-                <button type="button" class="btn btn-link">-</button>
-                1
-                <button type="button" class="btn btn-link">+</button>
-              </div>
+  <div class="ordem-compra">
+    <form #formValidate="ngForm">
+
+      <h5>Sua Compra</h5>
+      <hr />
+
+      <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+        <div class="form-group col-sm-1">
+          <img src="/assets/ofertas/1/img1.jpg" class="img-fluid">
+        </div>
+        <div class="form-group col-sm-6">
+          Super Burger
+          <br />
+          Rodízio de Mini-hambúrger com opção de entrada.
+        </div>
+
+        <div>
+          <div class="row">
+            <div class="col">
+              <button type="button" class="btn btn-link">-</button>
+              1
+              <button type="button" class="btn btn-link">+</button>
             </div>
           </div>
-  
-          <div class="form-group col-sm-3 d-flex justify-content-end">
-            29.90
-          </div>
         </div>
-        
-        <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
-          <div class="form-group col-sm-1">
-            <img src="/assets/ofertas/4/img1.jpg" class="img-fluid">
-          </div>
-          <div class="form-group col-sm-6">
-            Estância das águas
-            <br />
-            Diversão garantida com piscinas, trilhas e muito mais.
-          </div>
-  
-          <div>
-            <div class="row">
-              <div class="col">
-                <button type="button" class="btn btn-link">-</button>
-                1
-                <button type="button" class="btn btn-link">+</button>
-              </div>
+
+        <div class="form-group col-sm-3 d-flex justify-content-end">
+          29.90
+        </div>
+      </div>
+
+      <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+        <div class="form-group col-sm-1">
+          <img src="/assets/ofertas/4/img1.jpg" class="img-fluid">
+        </div>
+        <div class="form-group col-sm-6">
+          Estância das águas
+          <br />
+          Diversão garantida com piscinas, trilhas e muito mais.
+        </div>
+
+        <div>
+          <div class="row">
+            <div class="col">
+              <button type="button" class="btn btn-link">-</button>
+              1
+              <button type="button" class="btn btn-link">+</button>
             </div>
           </div>
-  
-          <div class="form-group col-sm-3 d-flex justify-content-end">
-            31.90
-          </div>
         </div>
-        
-        <div class="form-row">
-          <div class="form-group col d-flex justify-content-end">
-            <h4>Total do pedido: 61.80</h4>
-          </div>
+
+        <div class="form-group col-sm-3 d-flex justify-content-end">
+          31.90
         </div>
-        <br />
-  
-  
-        <h5>Dados de entrega</h5>
-        <hr />
-  
-        <div class="form-row">
-  
-          <div class="form-group col-md-6">
-            <input type="text" class="form-control is-invalid" placeholder="Endereço" autocomplete="off" minlength="5" required>
-            <div class="invalid-feedback">Endereço inválido</div>
-          </div>
-  
-          <div class="form-group col-md-2">
-            <input type="text" class="form-control is-valid" placeholder="Número" autocomplete="off" minlength="1" required>
-            <br />
-            <small class="form-text text-muted">Ok</small>
-          </div>
-  
-          <div class="form-group col-md-4">
-            <input type="text" class="form-control" placeholder="Complemento" autocomplete="off">
-          </div>
-  
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col d-flex justify-content-end">
+          <h4>Total do pedido: 61.80</h4>
         </div>
-        <br />
-  
-        <h5>Dados de pagamento</h5>
-        <hr />
-  
-        <div class="form-row">
-            
-          <div class="form-group col-md-3">
-            <select class="form-control is-invalid">
-              <option>Selecione uma opção</option>
-              <option>Dinheiro</option>
-              <option>Débito</option>
-            </select>
-  
-            <div class="invalid-feedback">Selecione uma forma de pagamento</div>
-          </div>
+      </div>
+      <br />
+
+
+      <h5>Dados de entrega</h5>
+      <hr />
+
+      <div class="form-row">
+
+        <div class="form-group col-md-6">
+          <input type="text" #enderecoValidate="ngModel" class="form-control {{countCaracterIgnoreSpace(endereco) >= 1 ? (endereco.trim() !== '' &&
+            countCaracterIgnoreSpace(endereco) < 5 ? 'is-invalid' : 'is-valid') : ''}}" name="endereco"
+            [(ngModel)]="endereco" placeholder="Endereço" autocomplete="off" minlength="{{countCaracterIgnoreSpace(endereco) >= 5 ? 5 : 10000}}" maxlength="80" required>
+
+          <small style="margin-left: 2px;" *ngIf="endereco.trim() === '' " class="form-text text-warning">Campo
+            obrigatório.</small>
+          <small style="margin-left: 2px;" *ngIf="endereco.trim() !== '' &&
+          countCaracterIgnoreSpace(endereco) < 5" class="form-text text-danger">Coloque no mínimo 5 caracteres.</small>
+          <small style="margin-left: 2px;" *ngIf="countCaracterIgnoreSpace(endereco) >= 5" enderecoValidate=true
+            class="form-text text-success">Ok</small>
         </div>
-  
-        <hr />
-        <button type="submit" class="btn btn-primary btn-lg">Cofirmar compra</button>
-      </form>
-    </div>
+
+        <div class="form-group col-md-2">
+          <input type="text" #numeroValidate="ngModel"
+            class="form-control {{numero.trim() !== '' ? (countCaracterIgnoreSpace(numero) >=2 ? 'is-valid' : 'is-invalid') : ''}}"
+            name="numero" [(ngModel)]="numero" placeholder="Número" autocomplete="off" minlength="{{countCaracterIgnoreSpace(numero) >= 2 ? 2 : 10000}}" maxlength="80" required="true">
+          <small style="margin-left: 2px;" *ngIf="numeroValidate.invalid && numero.trim() == '' "
+            class="form-text text-warning">Campo obrigatório.</small>
+          <small style="margin-left: 2px;" *ngIf="numero.trim() !== '' &&
+            countCaracterIgnoreSpace(numero) < 2" class="form-text text-danger">Coloque no mínimo 2
+            caracteres.</small>
+          <small style="margin-left: 2px;" *ngIf="countCaracterIgnoreSpace(numero) >= 2"
+            class="form-text text-success">Ok</small>
+        </div>
+
+        <div class="form-group col-md-4">
+          <input type="text" #complementoValidate="ngModel"
+            class="form-control {{complemento.trim() !== '' ? (complemento.trim() !== '' && countCaracterIgnoreSpace(complemento) >= 3  ? 'is-valid' : 'is-invalid') : ''}}"
+            name="complemento" [(ngModel)]="complemento" placeholder="Complemento" autocomplete="off" required="false" minlength="{{countCaracterIgnoreSpace(complemento) >= 3 ? 3 : 10000}}" maxlength="80">
+          <small *ngIf="complemento.trim() !== '' && countCaracterIgnoreSpace(complemento) >= 3 "
+            class="form-text text-success">Ok</small>
+          <small style="margin-left: 2px;" *ngIf="complemento.trim() !== '' &&
+            countCaracterIgnoreSpace(complemento) < 3" class="form-text text-danger">Coloque no mínimo 3
+            caracteres.</small>
+        </div>
+
+      </div>
+      <br />
+
+      <h5>Dados de pagamento</h5>
+      <hr />
+
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <select name="formaPagamento" required #formaPagamentoValidate="ngModel" [(ngModel)]="formaPagamento"
+            (ngModelChange)="alterarEstadoPrimitivo()"
+            class="form-control {{formaPagamentoEstadoAlterado ? (formaPagamento == '' ? 'is-invalid' : 'is-valid') : ''}}">
+            <option value="">Selecione uma opção</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="debito">Débito</option>
+          </select>
+          <div *ngIf="formaPagamento == '' " class="invalid-feedback">
+            <script>formData.form.controls['formaPagamento'].setErrors({ 'incorrect': true });</script>
+            Selecione uma forma de pagamento.
+          </div>
+          <small style="margin-left: 2px;" *ngIf="!formaPagamentoEstadoAlterado &&
+          countCaracterIgnoreSpace(formaPagamento) < 1" class="form-text text-warning">Selecione uma forma de
+            pagamento.</small>
+          <small *ngIf="formaPagamento !== '' " class="form-text text-success">Ok</small>
+          <pre><br>Formulário Inválido: {{formValidate.invalid | json}} <br>Formulário Válido: {{formValidate.valid | json}}</pre>
+          <pre></pre>
+        </div>
+      </div>
+
+      <hr />
+      <button type="submit" [disabled]="formValidate.invalid" class="btn btn-primary btn-lg">Cofirmar compra</button>
+    </form>
   </div>
+</div>
