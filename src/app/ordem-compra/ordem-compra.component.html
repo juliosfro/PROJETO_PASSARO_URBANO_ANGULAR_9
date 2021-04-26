@@ -69,39 +69,41 @@
       <div class="form-row">
 
         <div class="form-group col-md-6">
-          <input type="text" #enderecoValidate="ngModel" class="form-control {{countCaracterIgnoreSpace(endereco) >= 1 ? (endereco.trim() !== '' &&
+          <input type="text" #inputEndereco="ngModel" class="form-control {{countCaracterIgnoreSpace(endereco) >= 1 ? (endereco.trim() !== '' &&
             countCaracterIgnoreSpace(endereco) < 5 ? 'is-invalid' : 'is-valid') : ''}}" name="endereco"
-            [(ngModel)]="endereco" placeholder="Endereço" autocomplete="off" minlength="{{countCaracterIgnoreSpace(endereco) >= 5 ? 5 : 10000}}" maxlength="80" required>
+            [(ngModel)]="endereco" placeholder="Endereço" autocomplete="off"
+            minlength="{{countCaracterIgnoreSpace(endereco) >= 5 ? 5 : 10000}}" maxlength="80" required>
 
-          <small style="margin-left: 2px;" *ngIf="endereco.trim() === '' " class="form-text text-warning">Campo
+          <small style="margin-left: 2px;" *ngIf="endereco.trim()=== '' " class="form-text text-warning">Campo
             obrigatório.</small>
-          <small style="margin-left: 2px;" *ngIf="endereco.trim() !== '' &&
-          countCaracterIgnoreSpace(endereco) < 5" class="form-text text-danger">Coloque no mínimo 5 caracteres.</small>
-          <small style="margin-left: 2px;" *ngIf="countCaracterIgnoreSpace(endereco) >= 5" enderecoValidate=true
-            class="form-text text-success">Ok</small>
+          <small style="margin-left: 2px;" *ngIf="!inputEndereco.valid && endereco.trim() !== '' "
+            class="form-text text-danger">Coloque no mínimo
+            5 caracteres.</small>
+          <small style="margin-left: 2px;" *ngIf="inputEndereco.valid" class="form-text text-success">Ok</small>
         </div>
 
         <div class="form-group col-md-2">
-          <input type="text" #numeroValidate="ngModel"
+          <input type="text" #inputNumero="ngModel"
             class="form-control {{numero.trim() !== '' ? (countCaracterIgnoreSpace(numero) >=2 ? 'is-valid' : 'is-invalid') : ''}}"
-            name="numero" [(ngModel)]="numero" placeholder="Número" autocomplete="off" minlength="{{countCaracterIgnoreSpace(numero) >= 2 ? 2 : 10000}}" maxlength="80" required="true">
-          <small style="margin-left: 2px;" *ngIf="numeroValidate.invalid && numero.trim() == '' "
+            name="numero" [(ngModel)]="numero" placeholder="Número" autocomplete="off"
+            minlength="{{countCaracterIgnoreSpace(numero) >= 2 ? 2 : 10000}}" maxlength="10" required="true">
+          <small style="margin-left: 2px;" *ngIf="inputNumero.invalid && numero.trim() == '' "
             class="form-text text-warning">Campo obrigatório.</small>
           <small style="margin-left: 2px;" *ngIf="numero.trim() !== '' &&
-            countCaracterIgnoreSpace(numero) < 2" class="form-text text-danger">Coloque no mínimo 2
+           !inputNumero.valid" class="form-text text-danger">Coloque no mínimo 2
             caracteres.</small>
-          <small style="margin-left: 2px;" *ngIf="countCaracterIgnoreSpace(numero) >= 2"
-            class="form-text text-success">Ok</small>
+          <small style="margin-left: 2px;" *ngIf="inputNumero.valid" class="form-text text-success">Ok</small>
         </div>
 
         <div class="form-group col-md-4">
-          <input type="text" #complementoValidate="ngModel"
+          <input type="text" #inputComplemento="ngModel"
             class="form-control {{complemento.trim() !== '' ? (complemento.trim() !== '' && countCaracterIgnoreSpace(complemento) >= 3  ? 'is-valid' : 'is-invalid') : ''}}"
-            name="complemento" [(ngModel)]="complemento" placeholder="Complemento" autocomplete="off" required="false" minlength="{{countCaracterIgnoreSpace(complemento) >= 3 ? 3 : 10000}}" maxlength="80">
-          <small *ngIf="complemento.trim() !== '' && countCaracterIgnoreSpace(complemento) >= 3 "
-            class="form-text text-success">Ok</small>
+            name="complemento" [(ngModel)]="complemento" placeholder="Complemento" autocomplete="off" required="false"
+            minlength="{{countCaracterIgnoreSpace(complemento) >= 3 ? 3 : 10000}}" maxlength="80">
+          <small *ngIf="inputComplemento.valid && complemento.trim() !== '' " class="form-text text-success">Ok</small>
+          <!-- <pre>{{inputComplemento.valid | json}}</pre> -->
           <small style="margin-left: 2px;" *ngIf="complemento.trim() !== '' &&
-            countCaracterIgnoreSpace(complemento) < 3" class="form-text text-danger">Coloque no mínimo 3
+            !inputComplemento.valid" class="form-text text-danger">Coloque no mínimo 3
             caracteres.</small>
         </div>
 
@@ -114,8 +116,7 @@
       <div class="form-row">
         <div class="form-group col-md-3">
           <select name="formaPagamento" required #formaPagamentoValidate="ngModel" [(ngModel)]="formaPagamento"
-            (ngModelChange)="alterarEstadoPrimitivo()"
-            class="form-control {{formaPagamentoEstadoAlterado ? (formaPagamento == '' ? 'is-invalid' : 'is-valid') : ''}}">
+            class="form-control {{!formaPagamentoValidate.pristine ? (formaPagamento == '' ? 'is-invalid' : 'is-valid') : ''}}">
             <option value="">Selecione uma opção</option>
             <option value="dinheiro">Dinheiro</option>
             <option value="debito">Débito</option>
@@ -124,12 +125,12 @@
             <script>formData.form.controls['formaPagamento'].setErrors({ 'incorrect': true });</script>
             Selecione uma forma de pagamento.
           </div>
-          <small style="margin-left: 2px;" *ngIf="!formaPagamentoEstadoAlterado &&
+          <small style="margin-left: 2px;" *ngIf="formaPagamentoValidate.pristine &&
           countCaracterIgnoreSpace(formaPagamento) < 1" class="form-text text-warning">Selecione uma forma de
             pagamento.</small>
           <small *ngIf="formaPagamento !== '' " class="form-text text-success">Ok</small>
-          <pre><br>Formulário Inválido: {{formValidate.invalid | json}} <br>Formulário Válido: {{formValidate.valid | json}}</pre>
-          <pre></pre>
+          <!-- <pre><br>Formulário Inválido: {{formValidate.invalid | json}} <br>Formulário Válido: {{formValidate.valid | json}}</pre> -->
+          <!-- <pre>Forma de pgto pristine: {{formaPagamentoValidate.pristine | json}} </pre> -->
         </div>
       </div>
 

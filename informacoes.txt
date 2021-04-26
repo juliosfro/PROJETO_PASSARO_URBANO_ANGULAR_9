@@ -701,4 +701,35 @@ Validando dados do formulário parte 3 - Exibindo mensagens de suporte
 Validando dados do formulário parte 4 - Controlando botão "Confirmar compra"
 
 - Podemos habilitar o botão de submissão do formulário somente se todos os campos estiverem válidos.
-- 
+- Podemos verificar o estado de pristine que significa que o campo nunca foi alterado.
+
+    <pre><br>Formulário Inválido: {{formValidate.invalid | json}} <br>Formulário Válido: {{formValidate.valid | json}}</pre>
+    <pre>Forma de pgto pristine: {{formaPagamentoValidate.pristine | json}} </pre>
+
+    <small style="margin-left: 2px;" *ngIf="formaPagamentoValidate.pristine &&
+        countCaracterIgnoreSpace(formaPagamento) < 1" class="form-text text-warning">Selecione uma forma de
+        pagamento.
+    </small>
+
+- A validação é feita pelo ngForm levando em consideração os atributos required, minlength, maxlength e etc...
+- O formulário somente será validado se todos os campos seguirem as regras de validação imposta.
+- Podemos saber se o formulário se está valido usando formValidate.invalid.
+- formValidate é a variavel de referencia criada na abertura da tag do formulário.
+    - <form #formValidate="ngForm">
+- Para habilitar e dabilitar um botão podemos usar: 
+    - <button type="submit" [disabled]="formValidate.invalid" class="btn btn-primary btn-lg">Cofirmar compra</button>
+
+- O Angular possuí suas próprias classes default de feedback visual.
+- Podemos escolher se queremos usar as classes do angular ou as do bootstrap.
+- Classe de feedback visual são classes que deixam o input verde se está tudo certo ou vermelho
+se há algum erro por exemplo.
+- Podemos estilizar conforme a classe do angular que estiver presente.
+- ng-touched ng-dirty ng-valid => Foi tocado, recebeu conteudo, esta valido.
+- ng-touched ng-dirty ng-invalid => Foi tocado, recebeu conteudo, esta invalido.
+
+- Podemos definir estilos de acordo com as classes que já estão aplicadas no template.
+- Podemos verificar se determinada classe esta na tag e definir um estilo baseado nisso.
+
+Enviando o formulário via requisição HTTP (POST)
+
+- xxx...
