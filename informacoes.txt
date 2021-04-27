@@ -730,6 +730,40 @@ se há algum erro por exemplo.
 - Podemos definir estilos de acordo com as classes que já estão aplicadas no template.
 - Podemos verificar se determinada classe esta na tag e definir um estilo baseado nisso.
 
+
+Criando um serviço para ordens de compra
+
+- cd services
+- touch ordem-compra.service.ts
+
+Criando um model para ordem de compra
+
+- cd models
+- touch pedido.model.ts
+
+Implementando o método confirmarCompra
+
+- xxx...
+
 Enviando o formulário via requisição HTTP (POST)
+
+- Quando estamos trabalhando com Single Page Application deve trabalhar com botão
+do tipo button.
+    - button type="button"
+- O tipo submit ativa a trigger de envio de dados e da um refresh na página.
+
+Injetando o serviço HTTP do Angular em OrdemCompraService
+
+
+Enviando o formulário via requisição HTTP (POST) para API Rest
+
+- O método post da requisição http do angular espera três parâmetros:
+    - url -> Para onde vai ser feita a requisição http.
+    - body -> O que vai ser extraído do lado do servidor, ou seja, o que vai ser gravado no bd.
+    - RequestOptionsArgs -> Pode ser pedido para observar a resposta da requisição.
+
+- O body da requisição só aceita objetos no formato de string ou json.
+
+Feedback parte 1 - Criando o componente OrdemCompraSucesso
 
 - xxx...

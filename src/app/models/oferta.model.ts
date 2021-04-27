@@ -1,4 +1,3 @@
-import { HttpResponse } from '@angular/common/http';
 import { Imagem } from './imagem.model';
 export class Oferta {
 

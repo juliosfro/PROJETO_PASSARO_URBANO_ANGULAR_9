@@ -135,7 +135,10 @@
       </div>
 
       <hr />
-      <button type="submit" [disabled]="formValidate.invalid" class="btn btn-primary btn-lg">Cofirmar compra</button>
+      <button type="button" [disabled]="formValidate.invalid" (click)="confirmarCompra()"
+        class="btn btn-primary btn-lg">
+        Cofirmar compra
+      </button>
     </form>
   </div>
 </div>
