@@ -10,7 +10,5 @@ export class Pedido {
         public complemento: string,
         public formaPagamento: string
 
-    ) {
-
-    }
+    ) { }
 }

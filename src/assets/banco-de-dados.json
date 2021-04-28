@@ -187,11 +187,18 @@
   ],
   "pedidos": [
     {
-      "endereco": "Rua do adm",
-      "numero": "123",
+      "endereco": "Rua xv de novembro",
+      "numero": "230",
       "complemento": "Casa",
-      "formaPagamento": "debito",
+      "formaPagamento": "dinheiro",
       "id": 1
+    },
+    {
+      "endereco": "e3e32e3e",
+      "numero": "t54t54t",
+      "complemento": "",
+      "formaPagamento": "debito",
+      "id": 2
     }
   ]
 }

@@ -766,4 +766,81 @@ Enviando o formulário via requisição HTTP (POST) para API Rest
 
 Feedback parte 1 - Criando o componente OrdemCompraSucesso
 
+- ng g c OrdemCompraSucesso --skipTests=true
+- Os arquivos são criados seguindo o style guide padrão do angular.
+
+Introdução a Template Forms
+
+- Databinding => Atributos da classe controlam o estado do formulário e dos campos do formulário
+via databinding.
+- Template Forms => O Angular cria um objeto que representa o estado do formulário e dos campos 
+do formulário no DOM.
+
+Enviando formulário (ngSubmit) e explorando os dados do objeto NgForm 
+
+- Criamos um objeto de ngForm da seguinte maneira:
+    - <form novalidate #formOrdemCompra="ngForm">
+- Dentro da abertura da tag form criamos uma variavel de referencia chamada formOrdemCompra
+que será o nosso objeto do tipo ngForm.
+- O desafio será pegar o objeto do formulário (ngForm) e submeter para a classe do componente.
+- O objeto a ser submetido é formOrdemCompra, podemos ver os valores contidos no objeto da 
+seguinte forma:
+    - <pre>{{formOrdemCompra.value | json}}</pre>
+- A diretiva ngSubmit é a captura de um evento de submit de formulário.
+- É necessário usar o botão do tipo submit para que ele dispare a trigger de envio de formulários.
+
+    - <form novalidate #formOrdemCompra="ngForm" (ngSubmit)="confirmarCompra()">
+    - <button type="submit" [disabled]="formOrdemCompra.invalid" class="btn btn-primary btn-lg">
+
+- Ao clicar no botão o evento ngSubmit que está na tag de abertura do formulário é disparado
+executando o método associado a ele, no caso acima o método confirmarCompra().
+
+
+Acessando o formulário e explorando os dados do objeto NgForm com @ViewChild
+
+- Podemos passar os dados do objeto de ngForm no caso nosso formOrdemCompra através da função decoradora 
+@ViewChild para a variavel do tipo NgForm que está no arquivo typescript.
+
+          @ViewChild('formOrdemCompra') 
+          private formularioOrdemDeCompra: NgForm | undefined;
+
+- Então não é mais necessário passar nenhuma variavel como parametro para o arquivo typescript
+do nosso componente.
+    - <form novalidate #formOrdemCompra="ngForm" (ngSubmit)="confirmarCompraDois()">
+
+- Os validadores que o Angular suporta por padrão são:
+
+    - required - Valor não vazio.
+    - minlength - Número mínimo de caracteres.
+    - maxlength - Número máximo de caracteres.
+    - pattern - Valor do campo tem que atender a expressão regular.
+
+- Exemplo de uso do validador pattern:
+    - <input type="text" name="cep" ngModel pattern="[0-9]{8}">
+
+- Site com uma boa documentação sobre formulários:
+    - https://demoiselle.gitbooks.io/documentacao-frontend/content/formularios.html
+
+- O angular injeta por default suas próprias classes de css.
+
+As seguintes aulas são adicionadas ou removidas dos formulários:
+
+- ng-pristine => Nenhum campo não foi modificado ainda.
+- ng-dirty => Um ou mais campos foram modificados.
+- ng-valid => O conteúdo do campo do formulário é válido.
+- ng-invalid => O conteúdo do campo do formulário não é válido.
+- ng-valid-key => Uma chave para cada validação. 
+- Exemplo: ng-valid-required => Útil quando há mais de um item que deve ser validado.
+- ng-invalid-key => Exemplo: ng-invalid-required
+
+- As classes são removidas se os valores que as representam forem false.
+
+- Documentação sobre validação de formulários em Angular do Site da W3Schools:
+    - https://www.w3schools.com/angular/angular_validation.asp
+
+- Quando um campo estiver inválido o angular injeta de forma default a classe ng-invalid e 
+da mesma forma ocorre quando o campo estiver válido, pois injeta a classe ng-valid
+
+Introdução a Reactive Form
+
 - xxx...
