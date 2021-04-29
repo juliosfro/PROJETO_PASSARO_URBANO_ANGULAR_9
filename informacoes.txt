@@ -843,4 +843,78 @@ da mesma forma ocorre quando o campo estiver válido, pois injeta a classe ng-va
 
 Introdução a Reactive Form
 
+- FormsModule => validação dos campos feita através de atributos dos próprios elementos HTML 
+definidos no template.
+
+- FormsModule => Sincroniza com a classe do componente.
+
+- ReactiveFormsModule => validação dos campos feita através da classe do componente utilizando
+typescript (ts).
+
+- ReactiveFormsModule => Sincroniza com o template do componente (arquivo typescript, ts).
+
+- Em FormsModule os componentes (tags do html, input, button, divs) são do tipo ngModel.
+- ReactiveFormsModule os componentes são do tipo formControl, cada input por exemplo será 
+um formControl, cada formControl terá um nome através da propriedade formControlName.
+
+Reactive Forms - Importando módulo para aplicação
+
+- Assim como em FormsModule também temos que importar no app.module.ts o ReactiveFormsModule.
+- Após importar é so declarar no array de imports.
+
+- Vamos criar um novo componente para ficar mais facil de comparar a diferença entre os dois 
+tipos de paradigmas: FormsModule e ReactiveFormsModule.
+
+    - ng g c OrdemCompraReactive --skipTests=true
+
+Criando um FormGroup na classe do componente (form programático)
+
+- A idéia de Reactive Forms é prover os controles através da classe do componente.
+- Os formControl correspodem aos elementos do html, campos de texto, select e etc...
+- FormGroup para o formulário.
+- formControl para elementos do formulário.
+- formControl aceita três parametros opcionais:
+    - Primeiro => Valor incial do campo.
+    - Segundo => Array de validadores.
+    - Terceiro => Array de validadores assíncronos.
+
+- Exemplo de implementação de um novo formulário.
+
+    // Eh necessario sincronizar com o template html
+    public formularioOrdemDeCompra: FormGroup = new FormGroup({
+        "endereco": new FormControl(null),
+        "numero": new FormControl(null),
+        "complemento": new FormControl(null),
+        "formaPagamento": new FormControl(null)
+    });
+
+Sincronizando o FormGrupo com o formulário do template
+
+- Para associar nosso formulário com a instancia do formulario que criamos devemos.
+    -  <form [formGroup]="formularioOrdemDeCompra" novalidate>
+
+- Colocamos a diretiva formGroup apontando para instancia de FormGroup que criamos no template.
+
+- No template html setamos para os elementos do tipo FormControl a qual tag eles pertencem através
+da propriedade formControlName, veja abaixo:
+
+- <input type="text" class="form-control" placeholder="Endereço" autocomplete="off" formControlName="endereco">
+
+Enviando formulário (ngSubmit) e explorando os dados do objeto FormGroup
+
+- A proposta do Reactive Forms é tirar a validação do template (html) do componente e levar esse 
+processo para dentro da classe do componente (arquivo ts).
+
+- Podemos colocar as validações dos campos nas instâncias de FormControl.
+- Para cada um dos campos temos uma instância de formControl.
+
+Aplicando validações (Validators)
+
+- Para fazer as validações vamos usar a classe Validators.
+- A partir da classe Validators podemos usar vários métodos estáticos para incluir dentro 
+de formControl como segundo parâmetro as validações que queremos aplicar a cada um dos campos
+do nosso formulário.
+
+Aplicando feedback visual - Mensagens de controle
+
 - xxx...

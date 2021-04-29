@@ -1,0 +1,28 @@
+/* input:not([value]) {
+    color:red;
+    font-family: 'Courier New', Courier, monospace;
+} */
+
+/* Sera aplicado para todos os inputs que possuem as classes ng-invalid e ng-touched */
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+/* Sera aplicado para todos os selects que possuem as classes ng-invalid e ng-touched */
+
+select.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+/* Sera aplicado para todos os inputs que possuem as classes ng-valid e ng-touched */
+
+input.ng-valid.ng-touched {
+    border: 1px solid greenyellow;
+}
+
+/* Sera aplicado para todos os selects que possuem as classes ng-valid e ng-touched */
+
+select.ng-valid.ng-touched {
+    border: 1px solid greenyellow;
+}

@@ -1,3 +1,4 @@
+import { OrdemCompraReactiveComponent } from './../app/ordem-compra-reactive/ordem-compra-reactive.component';
 import { OrdemCompraSucessoComponent } from './../app/ordem-compra-sucesso/ordem-compra-sucesso.component';
 import { OrdemCompraComponent } from './../app/ordem-compra/ordem-compra.component';
 import { OndeFicaComponent } from './../app/onde-fica/onde-fica.component';
@@ -15,6 +16,7 @@ export const ROUTES: Routes = [
     { path: 'oferta', component: OfertaComponent },
     { path: 'ordem-compra-sucesso', component: OrdemCompraSucessoComponent },
     { path: 'ordem-compra', component: OrdemCompraComponent },
+    { path: 'ordem-compra-reactive', component: OrdemCompraReactiveComponent },
     {
         path: 'oferta/:id', component: OfertaComponent,
         children: [
