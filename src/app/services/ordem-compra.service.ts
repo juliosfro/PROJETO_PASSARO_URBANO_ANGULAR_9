@@ -9,10 +9,10 @@ export class OrdemCompraService {
 
     constructor(private http: HttpClient) { }
 
-    public efetivarCompra(pedido: Pedido): Observable<any> {
+    public efetivarCompra(pedido: Pedido): Observable<Pedido> {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         const options = { headers: headers }
-        return this.http.post<Observable<any>>(`${API_BASE_URL}pedidos`, JSON.stringify(pedido), options);
+        return this.http.post<Pedido>(`${API_BASE_URL}pedidos`, JSON.stringify(pedido), options);
     }
 
 }

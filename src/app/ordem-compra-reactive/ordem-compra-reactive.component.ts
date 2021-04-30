@@ -1,3 +1,4 @@
+import { Pedido } from './../models/pedido.model';
 import { OrdemCompraService } from './../services/ordem-compra.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,24 +11,58 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class OrdemCompraReactiveComponent implements OnInit {
 
-  public endereco: string | undefined;
+  public pedido: Pedido = this.criarPedido(null);
 
   // Eh necessario sincronizar com o template html
   public formularioOrdemDeCompra: FormGroup = new FormGroup({
     "endereco": new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(80), this.enderecoValidator]),
     "numero": new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(10)]),
     "complemento": new FormControl(null),
-    "formaPagamento": new FormControl(null, [Validators.required])
+    "formaPagamento": new FormControl('', [Validators.required])
   });
 
   constructor(private ordemCompraService: OrdemCompraService) { }
+
+  public idPedidoCompra: number = 0;
 
   ngOnInit() {
 
   }
 
   public confirmarCompra(): void {
-    console.log(this.formularioOrdemDeCompra);
+    // Para verificar se o formulario eh valido ou nao.
+    if (this.formularioOrdemDeCompra.status) {
+      const pedido: Pedido = this.criarPedido(null);
+      this.ordemCompraService.efetivarCompra(pedido).subscribe((response: Pedido) => {
+        const pedidoSalvo: Pedido = this.criarPedido(response);
+        this.idPedidoCompra = parseInt(pedidoSalvo.id);
+        // alert(this.idPedidoCompra);
+      });
+    }
+  }
+
+
+  criarPedido(pedido: any): Pedido {
+    if (pedido === null) {
+      return new Pedido(
+        '',
+        this.formularioOrdemDeCompra?.value.endereco,
+        this.formularioOrdemDeCompra?.value.numero,
+        this.formularioOrdemDeCompra?.value.complemento,
+        this.formularioOrdemDeCompra?.value.formaPagamento
+      );
+    } else if (pedido !== undefined) {
+      return new Pedido(pedido.id, pedido.endereco, pedido.numero, pedido.complemento, pedido.formaPagamento);
+    }
+    return new Pedido('', '', '', '', '');
+  }
+
+
+  limpaFormulario(): void {
+    this.formularioOrdemDeCompra.get('endereco')?.reset();
+    this.formularioOrdemDeCompra.get('numero')?.reset();
+    this.formularioOrdemDeCompra.get('complemento')?.reset();
+    this.formularioOrdemDeCompra.get('formaPagamento')?.reset();
   }
 
   // Valida tamanho minimo de 5 caracteres ignorando espacos vazio.

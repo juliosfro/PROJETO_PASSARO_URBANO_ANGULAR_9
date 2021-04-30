@@ -2,6 +2,7 @@ import { Pedido } from './../models/pedido.model';
 import { OrdemCompraService } from './../services/ordem-compra.service';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
+import { Parser } from '@angular/compiler/src/ml_parser/parser';
 
 @Component({
   selector: 'main-ordem-compra',
@@ -18,7 +19,7 @@ export class OrdemCompraComponent {
   public idPedidoCompra: number | undefined;
 
   // Eu sou obrigado a passar os atributos de pedido direto no construtor.
-  public pedido: Pedido = new Pedido(this.endereco, this.numero, this.complemento, this.formaPagamento);
+  public pedido: Pedido = new Pedido('', this.endereco, this.numero, this.complemento, this.formaPagamento);
 
   @ViewChild('formOrdemCompra')
   private formularioOrdemDeCompra: NgForm | undefined;
@@ -39,7 +40,7 @@ export class OrdemCompraComponent {
     this.pedido = this.formularioOrdemDeCompra?.value;
     this.ordemCompraService.efetivarCompra(this.pedido).subscribe(response => {
       // alert(`Id do pedido da compra => ` + response.id);
-      this.idPedidoCompra = response.id;
+      this.idPedidoCompra = parseInt(response.id);
     });
 
   }

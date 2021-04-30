@@ -5,6 +5,7 @@ export class Pedido {
     // Quando os parametros do construtor estao publicos eles sao refletidos como atributos
     // da classe que estamos implementando...
     constructor(
+        public id: string = '',
         public endereco: string,
         public numero: string,
         public complemento: string,

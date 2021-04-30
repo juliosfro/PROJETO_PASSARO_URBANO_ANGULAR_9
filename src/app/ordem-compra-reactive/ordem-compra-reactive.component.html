@@ -1,5 +1,5 @@
 <div class="container" style="padding-top: 3%; padding-bottom: 10%;">
-    <div class="ordem-compra">
+    <div class="ordem-compra" *ngIf="idPedidoCompra === 0">
         <form [formGroup]="formularioOrdemDeCompra" novalidate (ngSubmit)="confirmarCompra()">
 
             <h5>Sua Compra</h5>
@@ -70,21 +70,46 @@
                 <div class="form-group col-md-6">
                     <input type="text" class="form-control" placeholder="Endereço" autocomplete="off"
                         formControlName="endereco">
+
+                    <small
+                        *ngIf="!formularioOrdemDeCompra.get('endereco')?.valid && (formularioOrdemDeCompra.get('endereco')?.value?.trim() === null || formularioOrdemDeCompra.get('endereco')?.value?.trim() === '')"
+                        class="form-text text-warning">Campo obrigatório.</small>
+                    <small
+                        *ngIf="formularioOrdemDeCompra.get('endereco')?.valid && formularioOrdemDeCompra.get('endereco')?.touched"
+                        class="form-text text-success">Ok</small>
+                    <small
+                        *ngIf="!formularioOrdemDeCompra.get('endereco')?.valid && formularioOrdemDeCompra.get('endereco')?.touched && formularioOrdemDeCompra.get('endereco')?.value?.trim() !== '' && formularioOrdemDeCompra.get('endereco')?.value?.trim() !== null"
+                        class="form-text text-danger">Endereço inválido.</small>
+                    <!-- 
                     <pre><br>Erro de campo de endereço inválido: {{formularioOrdemDeCompra.get('endereco')?.errors?.enderecoInvalido | json}}</pre>
                     <pre>Erro de tamanho mínimo: {{formularioOrdemDeCompra.get('endereco')?.errors?.minLength | json}}</pre>
                     <pre>Formulário Válido: {{formularioOrdemDeCompra.valid | json}}</pre>
-                    <small class="form-text text-success">Ok</small>
+                    <pre>Pristine: {{formularioOrdemDeCompra.get('endereco')?.pristine | json}}</pre>
+                    <pre>Vazio: {{formularioOrdemDeCompra.get('endereco')?.value?.trim() === null | json}}</pre> -->
+
+
                 </div>
 
                 <div class="form-group col-md-2">
                     <input type="text" class="form-control" placeholder="Número" autocomplete="off"
                         formControlName="numero">
-                    <small class="form-text text-success">Ok</small>
+
+                    <small
+                        *ngIf="!formularioOrdemDeCompra.get('numero')?.valid && (formularioOrdemDeCompra.get('numero')?.value?.trim() === null || formularioOrdemDeCompra.get('numero')?.value?.trim() === '')"
+                        class="form-text text-warning">Campo obrigatório.</small>
+                    <small
+                        *ngIf="formularioOrdemDeCompra.get('numero')?.valid && formularioOrdemDeCompra.get('numero')?.touched"
+                        class="form-text text-success">Ok</small>
+                    <small
+                        *ngIf="!formularioOrdemDeCompra.get('numero')?.valid && formularioOrdemDeCompra.get('numero')?.touched && formularioOrdemDeCompra.get('numero')?.value?.trim() !== '' && formularioOrdemDeCompra.get('numero')?.value?.trim() !== null"
+                        class="form-text text-danger">Coloque no mínimo 2 caracteres.</small>
                 </div>
 
                 <div class="form-group col-md-4">
                     <input type="text" class="form-control" placeholder="Complemento" autocomplete="off"
                         formControlName="complemento">
+
+                    <small class="form-text text-success">Campo não obrigatório.</small>
                 </div>
 
             </div>
@@ -96,17 +121,31 @@
             <div class="form-row">
 
                 <div class="form-group col-md-3">
-                    <select class="form-control" formControlName="formaPagamento">
-                        <option value="null">Selecione uma opção</option>
+                    <select class="form-control" formControlName="formaPagamento" required>
+                        <option value=''>Selecione uma opção</option>
                         <option value="dinheiro">Dinheiro</option>
                         <option value="debito">Débito</option>
                     </select>
-                    <small class="form-text text-success">Ok</small>
+
+                    <small
+                        *ngIf="!formularioOrdemDeCompra.get('formaPagamento')?.valid && (formularioOrdemDeCompra.get('formaPagamento')?.value?.trim() === null || formularioOrdemDeCompra.get('formaPagamento')?.pristine)"
+                        class="form-text text-warning">Campo obrigatório.</small>
+                    <small
+                        *ngIf="!formularioOrdemDeCompra.get('formaPagamento')?.valid && formularioOrdemDeCompra.get('formaPagamento')?.touched && !formularioOrdemDeCompra.get('formaPagamento')?.pristine "
+                        class="form-text text-danger">Selecione uma forma de pagamento.</small>
+                    <small
+                        *ngIf="formularioOrdemDeCompra.get('formaPagamento')?.valid && formularioOrdemDeCompra.get('formaPagamento')?.touched"
+                        class="form-text text-success">Ok</small>
                 </div>
             </div>
 
             <hr />
-            <button type="submit" class="btn btn-primary btn-lg">Cofirmar compra</button>
+            <button type="submit" class="btn btn-primary btn-lg" [disabled]="formularioOrdemDeCompra.invalid">
+                Cofirmar compra
+            </button>
         </form>
+    </div>
+    <div class="form-control" *ngIf="idPedidoCompra !== 0">
+        <main-ordem-compra-sucesso [idPedidoCompra]="idPedidoCompra"></main-ordem-compra-sucesso>
     </div>
 </div>

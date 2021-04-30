@@ -917,4 +917,8 @@ do nosso formulário.
 
 Aplicando feedback visual - Mensagens de controle
 
+Controlando envio do formulário
+
+Estratégia de implementação do carrinho de compras
+
 - xxx...
