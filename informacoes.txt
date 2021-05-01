@@ -921,4 +921,77 @@ Controlando envio do formulário
 
 Estratégia de implementação do carrinho de compras
 
-- xxx...
+- Vamos trabalhar na relação de itens que compõem o pedido.
+- A partir dos componentes será possível fazer interações com o carrinho de compras.
+- Todas as interações com o carrinho de compras serão gerenciadas por um serviço.
+
+- Comando para criar o service do carrinho de compras.
+    - cd services
+    - touch carrinho.service.ts
+
+Criando o model ItemCarrinho
+
+- O item dentro do carrinho irá conter algumas informações diferentes sendo que do ponto de vista 
+do pedido, o item envolvido não é necessariamente uma oferta mas sim um objeto que se baseia na 
+oferta porém com outras informações.
+- Vamos criar uma classe de modelo com os atributos que farão parte do carrinho.
+
+Atribuindo CarrinhoService ao componente OrdemCompraReactiveComponent
+
+- OrdemCompraReactiveComponent (componente de ordem de compra) é quem faz a apresentação dos itens
+que serão comprados.
+- Vamos fazer a injeção do serviço CarrinhoService em OrdemCompraReactiveComponent, só que ocorrerá 
+um erro mais adiante, com esse erro iremos ver como uma instancia de um serviço pode trabalhar 
+melhor dentro de uma aplicação.
+
+Atribuindo CarrinhoService ao componente OfertaComponent
+
+- O componente OfertaComponent exibe as ofertas e permite a inclusão de itens dentro do carrinho de compra.
+- O componente OrdemCompraReactiveComponent apenas exibe os itens após inseridos no carrinho.
+- Então precisaremos do serviço CarrinhoService disponível em dois locais da nossa aplicação.
+- Estamos fazendo a injeção de CarrinhoService dentro de componentes específicos para que possamos 
+entender como que funciona a questão de instancia única de serviço.
+- Mais pra frente vamos encontrar um erro pelo motivo de estarmos usando instancia única de um serviço.
+
+Incluindo itens (ofertas) no carrinho de compras
+
+ - A partir de OfertaComponent vamos adicionar itens no carrinho de compra.
+ - Vamos capturar o evento de clique sobre o botão adicionar ao carrinho e enviar esse item para 
+ a classe OfertaComponent e depois enviar esse item como um item de carrinho para o CarrinhoService.
+ 
+ Entendendo e corrigindo a instância do serviço CarrinhoService
+
+ - Nível de declaração do serviço, quando a instancia do componente é destruída, a instancia
+ do serviço é destruída junto.
+ - Se um serviço for injetado em dois componentes então teremos duas instancias (diferentes) de 
+ um mesmo serviço.
+ - Como fazer para que um serviço seja único em nossa aplicação para que possamos navegar por todos
+ os componentes fazendo com que esses componentes afetem o estado do mesmo serviço (única instância)?
+ - Vamos retirar a declaração do serviço do nível do componente e levar para o nível do módulo.
+ - Todos os componentes que fazem parte do módulo que o serviço do carrinho está injetado terão acesso
+ as mesmas informações.
+ - Vamos em app.module.ts que é o módulo principal da nossa aplicação onde todos os componentes estão 
+ referenciados e vamos importar o serviço CarrinhoService.
+ 
+ - Não podemos importar uma exportação do tipo default para dentro de app.module.ts (módulo principal).
+ - A importação deve ocorrer normal utilizando o par de chaves { NomeServico }
+ - Aprender sobre exportação default e exportação direta.
+ - Temos que referenciar CarrinhoService no array de providers de @NgModule que é o nosso módulo principal.
+ - Após o serviço estar no escopo do módulo precisamos ajustar os componentes que injetamos o serviço
+ diretamente.
+ - Precisamos tirar a referencia do serviço CarrinhoService do provider do componente OfertaComponent e 
+ de OrdemCompraReactiveComponent.
+ - No construtor dos componentes (OfertaComponent e OrdemCompraReactiveComponent) precisamos 
+ continuar injetando o serviço CarrinhoService.
+ - Sem definir o serviço no provider do componente estamos delegando para o Angular a inteligência de 
+ procurar por esse serviço no provider do módulo.
+ - O serviço nascerá junto com o componente pois ele está definido no construtor.
+ - Teremos uma instancia única de CarrinhoService para todos os componentes que fazem parte do módulo.
+ 
+ Exibindo itens do carrinho de compras em OrdemCompraReactiveComponent
+
+ - A quantidade é uma propriedade que diferencia um item do carrinho de uma oferta.
+ 
+ Aumentando a quantidade dos itens 
+
+ - xxx...

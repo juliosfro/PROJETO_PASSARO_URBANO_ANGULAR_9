@@ -1,3 +1,5 @@
+import { ItemCarrinho } from './../models/item-carrinho.model';
+import { CarrinhoService } from './../services/carrinho.service';
 import { Pedido } from './../models/pedido.model';
 import { OrdemCompraService } from './../services/ordem-compra.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -9,9 +11,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./ordem-compra-reactive.component.css'],
   providers: [OrdemCompraService]
 })
+
 export class OrdemCompraReactiveComponent implements OnInit {
 
   public pedido: Pedido = this.criarPedido(null);
+
+  constructor(private ordemCompraService: OrdemCompraService, public carrinhoService: CarrinhoService) { }
 
   // Eh necessario sincronizar com o template html
   public formularioOrdemDeCompra: FormGroup = new FormGroup({
@@ -21,11 +26,14 @@ export class OrdemCompraReactiveComponent implements OnInit {
     "formaPagamento": new FormControl('', [Validators.required])
   });
 
-  constructor(private ordemCompraService: OrdemCompraService) { }
 
   public idPedidoCompra: number = 0;
+  public itensCarrinho: ItemCarrinho[] = new Array<ItemCarrinho>();
 
   ngOnInit() {
+
+    this.itensCarrinho = this.carrinhoService.exibirItens();
+    console.log(this.itensCarrinho);
 
   }
 

@@ -1,3 +1,4 @@
+import { CarrinhoService } from './services/carrinho.service';
 import { DescricaoReduzida } from './util/descricao-reduzida.pipe';
 import { ROUTES } from './../routes/app.routes';
 import { RouterModule } from '@angular/router';
@@ -50,6 +51,7 @@ registerLocaleData(localePt);
     RouterModule.forRoot(ROUTES)
   ],
   providers: [
+    CarrinhoService,
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'
@@ -57,4 +59,5 @@ registerLocaleData(localePt);
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
