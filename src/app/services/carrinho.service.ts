@@ -31,7 +31,30 @@ export class CarrinhoService {
             this.itens_carrinho.push(itemCarrinho);
         }
 
-        console.log('Oferta recebida no serviço: ' + JSON.stringify(itemCarrinho));
+        // console.log('Oferta recebida no serviço: ' + JSON.stringify(itemCarrinho));
+
+    }
+
+    public adicionarQuantidade(item: ItemCarrinho): void {
+        // Incrementar quantidade
+        const itemEncontrado = this.itens_carrinho.find((item: ItemCarrinho) => item.id === item.id);
+        if (itemEncontrado) {
+            itemEncontrado.quantidade += 1;
+        }
+
+    }
+
+    public diminuirQuantidade(item: ItemCarrinho): void {
+        // Incrementar quantidade
+        const itemEncontrado = this.itens_carrinho.find((item: ItemCarrinho) => item.id === item.id);
+        if (itemEncontrado) {
+            itemEncontrado.quantidade -= 1;
+
+            if (itemEncontrado.quantidade === 0) {
+                // Serve para recortar (tirar) um elemento de dentro do array.
+                this.itens_carrinho.splice(this.itens_carrinho.indexOf(itemEncontrado), 1);
+            }
+        }
 
     }
 

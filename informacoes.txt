@@ -992,6 +992,18 @@ Incluindo itens (ofertas) no carrinho de compras
 
  - A quantidade é uma propriedade que diferencia um item do carrinho de uma oferta.
  
- Aumentando a quantidade dos itens 
+Aumentando a quantidade dos itens 
 
- - xxx...
+Diminuindo a quantidade dos itens - tratando a quantidade zero
+
+- Se a quantidade do produto for zero ele será removido do carrinho.
+- A quantidade não pode ser negativa pois o valor de compra passa a ser negativo.
+
+Tratando ordem de compra sem itens
+
+- Podemos exibir uma mensagem para o usuário caso o carrinho de compras esteja vazio.
+- Enquanto não houver itens não faz sentido mostrar o total do pedido.
+
+Impedindo confirmação da compra se ordem compra não possuir itens
+
+- xxx...

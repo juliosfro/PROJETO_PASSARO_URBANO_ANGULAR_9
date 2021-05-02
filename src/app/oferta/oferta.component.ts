@@ -18,7 +18,7 @@ export class OfertaComponent implements OnInit {
   constructor(private route: ActivatedRoute, private ofertasService: OfertasService, private carrinhoService: CarrinhoService) { }
 
   ngOnInit(): void {
-    
+
     this.carrinhoService.exibirItens();
     /* Recuperacao do parametro id vindo na URI atraves de snapshot */
     // this.id_oferta = this.route.snapshot.paramMap.get('id');
@@ -40,9 +40,9 @@ export class OfertaComponent implements OnInit {
   public adicionarItemCarrinho(): void {
     // console.log(this.oferta);
     this.carrinhoService.incluirItem(this.oferta);
-    const x = this.carrinhoService.exibirItens();
-    console.log(x);
-    
+    // const x = this.carrinhoService.exibirItens();
+    // console.log(x);
+
   }
 
 }

@@ -33,7 +33,7 @@ export class OrdemCompraReactiveComponent implements OnInit {
   ngOnInit() {
 
     this.itensCarrinho = this.carrinhoService.exibirItens();
-    console.log(this.itensCarrinho);
+    // console.log(this.itensCarrinho);
 
   }
 
@@ -47,6 +47,18 @@ export class OrdemCompraReactiveComponent implements OnInit {
         // alert(this.idPedidoCompra);
       });
     }
+  }
+
+
+  /* Esse metodo vai fazer uma ponte entre o template e o service do carrinho */
+  adicionarQuantidade(item: ItemCarrinho): void {
+    // alert(JSON.stringify(item));
+    this.carrinhoService.adicionarQuantidade(item);
+  }
+
+  diminuirQuantidade(item: ItemCarrinho): void {
+    // alert(JSON.stringify(item));
+    this.carrinhoService.diminuirQuantidade(item);
   }
 
 
