@@ -35,27 +35,23 @@ export class CarrinhoService {
 
     }
 
-    public adicionarQuantidade(item: ItemCarrinho): void {
-        // Incrementar quantidade
-        const itemEncontrado = this.itens_carrinho.find((item: ItemCarrinho) => item.id === item.id);
-        if (itemEncontrado) {
-            itemEncontrado.quantidade += 1;
+    public adicionarQuantidade(itemCarrinho: ItemCarrinho): void {
+        //incrementar quantidade
+        let itemCarrinhoEncontrado = this.itens_carrinho.find((item: ItemCarrinho) => item.id === itemCarrinho.id)
+        if (itemCarrinhoEncontrado) {
+            itemCarrinhoEncontrado.quantidade += 1
         }
-
     }
 
-    public diminuirQuantidade(item: ItemCarrinho): void {
-        // Incrementar quantidade
-        const itemEncontrado = this.itens_carrinho.find((item: ItemCarrinho) => item.id === item.id);
-        if (itemEncontrado) {
-            itemEncontrado.quantidade -= 1;
+    public diminuirQuantidade(itemCarrinho: ItemCarrinho): void {
+        let itemCarrinhoEncontrado = this.itens_carrinho.find((item: ItemCarrinho) => item.id === itemCarrinho.id)
+        if (itemCarrinhoEncontrado) {
+            itemCarrinhoEncontrado.quantidade -= 1
 
-            if (itemEncontrado.quantidade === 0) {
-                // Serve para recortar (tirar) um elemento de dentro do array.
-                this.itens_carrinho.splice(this.itens_carrinho.indexOf(itemEncontrado), 1);
+            if (itemCarrinhoEncontrado.quantidade === 0) {
+                this.itens_carrinho.splice(this.itens_carrinho.indexOf(itemCarrinhoEncontrado), 1)
             }
         }
-
     }
 
     public totalCarrinhoCompras(): number {
@@ -64,6 +60,10 @@ export class CarrinhoService {
             valor_total_carrinho += (item.valor * item.quantidade);
         });
         return valor_total_carrinho;
+    }
+
+    public limparCarrinho(): void {
+        this.itens_carrinho = [];
     }
 
 }

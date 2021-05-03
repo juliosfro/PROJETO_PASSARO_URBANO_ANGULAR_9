@@ -19,7 +19,7 @@ export class OrdemCompraComponent {
   public idPedidoCompra: number | undefined;
 
   // Eu sou obrigado a passar os atributos de pedido direto no construtor.
-  public pedido: Pedido = new Pedido('', this.endereco, this.numero, this.complemento, this.formaPagamento);
+  public pedido: Pedido = new Pedido('', this.endereco, this.numero, this.complemento, this.formaPagamento, []);
 
   @ViewChild('formOrdemCompra')
   private formularioOrdemDeCompra: NgForm | undefined;

@@ -1006,4 +1006,134 @@ Tratando ordem de compra sem itens
 
 Impedindo confirmação da compra se ordem compra não possuir itens
 
-- xxx...
+- Não vamos deixar o pedido ser enviado para o serviço OrdemCompraService se ele não possuir itens.
+- Podemos verificar dessa maneira:
+    - this.carrinhoService.exibirItens().length
+
+Enviando pedido com itens de carrinho para API Rest
+
+- O método (função) efetivarCompra de OrdemCompraService precisa receber os dados de 
+carrinhoService.exibirItens(), ou seja, além de receber os dados do endereço aonde 
+vai ser entregue os produtos também deve receber o array contendo a lista de itens 
+que estão adicionados dentro do carrinho.
+
+ Atualizando o Angular/Cli
+
+ - Como atualizar o Angular CLI (Command Line Interface)?
+ - É através do angular cli que se pode iniciar projetos, criar componentes, 
+ pipes, produção de builds quanto de desenvolvimento quanto de produção.
+
+- Abaixo esta o comando para desinstalar o angular cli de forma global.
+    - npm uninstall -g @angular/cli
+
+- Como para instalar o angular cli de forma global 
+    - npm install -g @angular/cli@11.1.2 
+
+Migrando o projeto Pássaro Urbano
+
+- Para migrar um projeto para a nova versão do angular/cli é necessário criar um novo 
+projeto com o comando ng new nomeDoProjeto.
+- Em segundo verificar o arquivo package.json do projeto anterior e ver as dependencias 
+que estão inclusas lá.
+- Adicionar as dependencias no arquivo package.json do projeto atual, como a do bootstrap,
+jquery, intl e etc...
+
+- É necessario verificar o arquivo angular.json pois é nele que se referencia todos os estilos
+e escripts globais, nele se adiciona a referencia do bootstrap, jquery, popper e etc...
+
+- O terceiro passo é trazer o source (src) do projeto antigo para o projeto novo.
+
+ Build de produção do App Pássaro Urbano
+
+ - Vamos exportar o build de produção da nossa aplicação Passaro Urbano.
+ - Dentro do diretório do projeto vamos executar o comando ng build.
+    - cd /Users/julio/Desktop/appPassaroUrbano/
+    -  ng build --prod
+
+- Caso o orçamento do tamanho do pacote seja excedido é só configurar no arquivo angular.json 
+o tamanho maximo e minimo em budgets.
+- Dentro do diretório do projeto será criado um diretório chamado dist.
+- No angular 4 existem dois métodos de compilação: 
+    - Just-in-Time Compilation 
+    - (AOT) Ahead-of-Time Compilation
+
+- Ahead-of-Time Compilation (AOT) é a forma mais otimizada de geração de builds.
+- O método default de compilação pode variar de uma versão do angular/cli para outra.
+- A partir da versão 1.4.3 do angular/cli a forma de default de compilação é a (AOT).
+
+Just-in-Time Compilation vs Ahead-of-Time Compilation - Introdução
+
+- Em Just-in-Time Compilation é incluso junto dos arquivos que estão no diretório dist 
+um ou mais arquivos contendo o compilador que vai tranformar os códigos em javascript, html e css.
+
+- Em Ahead-of-Time Compilation (AOT) todos os Chunk Files já vão compilados para javascript, html, css e 
+etc, não sendo necessario enviar ao navegador o compilador pois tudo já chega compilado no navegador.
+
+- O segundo método é mais vantajoso pois não existe a necessidade de compilar o template dentro
+do navegador para exibi-lo, pois ele já chega no navegador da forma que ele entende.
+
+- Com o Ahead-of-Time Compilation (AOT) o tamanho do arquivo de build fica menor.
+
+Just-in-Time Compilation vs Ahead-of-Time Compilation - Prática
+
+- A melhor forma de saber qual tipo de compilação está sendo feita é implicitamente forçar o tipo
+de compilação desejado.
+
+- Para compilar em Ahead-of-Time Compilation (AOT).
+    - ng build --prod --aot=true 
+
+- Para compilar em Just-in-Time Compilation (JIT).
+    - ir no arquivo angular.json e setar a propriedade aot de architect para false.
+
+Deploy local via pacote http-server
+
+- Vamos fazer o deploy local usando o pacote http-server.
+- Podemos instalar o http-server de forma global com o comando:
+    -  npm install -g http-server
+
+- Para rodar basta apenas executar o comando http-server dentro do diretório do projeto.
+
+Deploy local via MAMP
+
+- Podemos rodar nosso projeto diretamente pelo servidor Apache do MAMP.
+- O primeiro passo é copiar a pasta com o nome do projeto que está no diretório abaixo:
+    - /Users/julio/Desktop/appPassaroUrbano/dist 
+
+- O segundo passo é colar a pasta do projeto em:
+    - /Applications/MAMP/htdocs
+
+- No MAMP clicamos em Main Window > Hosts > General > Document root > select new document root
+- Verificar a porta em que o apache está rodando no MAMP.
+    - Main Window > Ports 
+
+- Se a porta for a 80 podemos digitar apenas localhost, pois a porta default do navegador é a 80.
+
+Deploy na nuvem com Amazon AWS S3
+
+- Política de acesso ao bucket -> Deixar como somente leitura.
+
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "PublicRead",
+                    "Effect": "Allow",
+                    "Principal": "*",
+                    "Action": [
+                        "s3:GetObject",
+                        "s3:GetObjectVersion"
+                    ],
+                    "Resource": "arn:aws:s3:::passaro-urbano-juliosfro/*"
+                }
+            ]
+        }
+
+- Fazer o upload dos arquivos para dentro do bucket selecionando todos os arquivos dentro da 
+pasta e arrastando, não fazer o upload da pasta e sim dos arquivos que estão contidos.
+
+- Hospedagem de site estático
+
+- Ativar a hospedagem de site estático na aba Propriedades do bucket.
+- Definir a página inicial (index.html) e a página de erro (pode ser index.html também).
+
+- Projeto Finalizado!!!

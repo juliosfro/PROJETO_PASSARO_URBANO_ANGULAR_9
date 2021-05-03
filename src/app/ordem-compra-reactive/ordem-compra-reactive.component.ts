@@ -39,24 +39,33 @@ export class OrdemCompraReactiveComponent implements OnInit {
 
   public confirmarCompra(): void {
     // Para verificar se o formulario eh valido ou nao.
-    if (this.formularioOrdemDeCompra.status) {
-      const pedido: Pedido = this.criarPedido(null);
-      this.ordemCompraService.efetivarCompra(pedido).subscribe((response: Pedido) => {
-        const pedidoSalvo: Pedido = this.criarPedido(response);
-        this.idPedidoCompra = parseInt(pedidoSalvo.id);
-        // alert(this.idPedidoCompra);
-      });
+    if (this.formularioOrdemDeCompra.status === 'VALID') {
+      // Para verificar se ha itens no carrinho
+      if (this.carrinhoService.exibirItens().length) {
+        const pedido: Pedido = this.criarPedido(null);
+        console.log(pedido);
+        this.ordemCompraService.efetivarCompra(pedido).subscribe((response: Pedido) => {
+          const pedidoSalvo: Pedido = this.criarPedido(response);
+          this.idPedidoCompra = parseInt(pedidoSalvo.id);
+
+          this.carrinhoService.limparCarrinho();
+          // alert(this.idPedidoCompra);
+        });
+      } else {
+        alert('Você não adicionou itens no carrinho!');
+      }
+
     }
   }
 
 
   /* Esse metodo vai fazer uma ponte entre o template e o service do carrinho */
-  adicionarQuantidade(item: ItemCarrinho): void {
+  adicionar(item: ItemCarrinho): void {
     // alert(JSON.stringify(item));
     this.carrinhoService.adicionarQuantidade(item);
   }
 
-  diminuirQuantidade(item: ItemCarrinho): void {
+  diminuir(item: ItemCarrinho): void {
     // alert(JSON.stringify(item));
     this.carrinhoService.diminuirQuantidade(item);
   }
@@ -69,12 +78,13 @@ export class OrdemCompraReactiveComponent implements OnInit {
         this.formularioOrdemDeCompra?.value.endereco,
         this.formularioOrdemDeCompra?.value.numero,
         this.formularioOrdemDeCompra?.value.complemento,
-        this.formularioOrdemDeCompra?.value.formaPagamento
+        this.formularioOrdemDeCompra?.value.formaPagamento,
+        this.carrinhoService.exibirItens()
       );
     } else if (pedido !== undefined) {
-      return new Pedido(pedido.id, pedido.endereco, pedido.numero, pedido.complemento, pedido.formaPagamento);
+      return new Pedido(pedido.id, pedido.endereco, pedido.numero, pedido.complemento, pedido.formaPagamento, pedido.itens);
     }
-    return new Pedido('', '', '', '', '');
+    return new Pedido('', '', '', '', '', []);
   }
 
 

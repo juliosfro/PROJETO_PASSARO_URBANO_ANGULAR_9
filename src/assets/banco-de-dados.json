@@ -188,10 +188,36 @@
   "pedidos": [
     {
       "id": 1,
-      "endereco": "Rua do dentista",
-      "numero": "540",
+      "endereco": "Rua do administrador",
+      "numero": "684",
       "complemento": "Casa",
-      "formaPagamento": "dinheiro"
+      "formaPagamento": "dinheiro",
+      "itens": [
+        {
+          "id": 2,
+          "imagem": "/assets/ofertas/2/img1.jpg",
+          "titulo": "Cozinha Mexicana",
+          "descricao_oferta": "Almoço ou Jantar com Rodízio Mexicano delicioso.",
+          "valor": 32.9,
+          "quantidade": 2
+        },
+        {
+          "id": 3,
+          "imagem": "/assets/ofertas/3/img1.jpg",
+          "titulo": "Pizzas Grandes",
+          "descricao_oferta": "Pizza Grande, Mussarela, Marguerita ou outras!",
+          "valor": 21.9,
+          "quantidade": 3
+        },
+        {
+          "id": 6,
+          "imagem": "/assets/ofertas/6/img1.jpg",
+          "titulo": "Academia de tiro",
+          "descricao_oferta": "Sessão de tiro dinâmico com Instrutor, Estande, Alvo e Equipamentos.",
+          "valor": 89.9,
+          "quantidade": 4
+        }
+      ]
     }
   ]
 }

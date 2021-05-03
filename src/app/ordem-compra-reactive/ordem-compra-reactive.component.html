@@ -21,10 +21,9 @@
                     <div>
                         <div class="row">
                             <div class="col">
-                                <button (click)="diminuirQuantidade(item)" type="button" class="btn btn-link">-</button>
+                                <button (click)="diminuir(item)" type="button" class="btn btn-link">-</button>
                                 {{item.quantidade}}
-                                <button (click)="adicionarQuantidade(item)" type="button"
-                                    class="btn btn-link">+</button>
+                                <button (click)="adicionar(item)" type="button" class="btn btn-link">+</button>
                             </div>
                         </div>
                     </div>
@@ -44,7 +43,8 @@
             <br />
 
             <ng-template #carrinhoVazio>
-                <div class="form-row d-flex justify-content-center" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+                <div class="form-row d-flex justify-content-center"
+                    style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
                     Seu carrinho está vazio! Não perca tempo, aproveite as ofertas.
                 </div>
             </ng-template>
